@@ -1,0 +1,12 @@
+.drop-file {
+  grid-area: drop-file;
+
+  align-self: stretch;
+  background-color: red;
+
+  padding: 1em;
+
+  &.is-dragover {
+    background-color: blue;
+  }
+}
