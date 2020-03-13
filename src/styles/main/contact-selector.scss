@@ -1,0 +1,29 @@
+.contact-selector {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+  grid-auto-rows: auto;
+
+  column-gap: 10px;
+  row-gap: 15px;
+
+  .who-are-you {
+    font-weight: lighter;
+    grid-column: 1 / 3;
+    margin-bottom: 10px;
+  }
+
+  .contact {
+    height: 80px;
+    font-size: 20px;
+    text-transform: uppercase;
+    border-radius: 20px;
+    background-color: rgba($color: #000000, $alpha: 0.1);
+    transition: background-color 300ms;
+    outline: none;
+
+    &:hover {
+      background-color: rgba($color: #000000, $alpha: 0.2);
+    }
+  }
+}
