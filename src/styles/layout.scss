@@ -51,7 +51,7 @@
   }
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 1030px) {
   .back-header {
     display: none;
   }
@@ -61,7 +61,8 @@
     grid-template-rows: auto;
   }
 
-  .card  {
+  .card {
     border-radius: 0px;
+    max-height: 100vh !important;
   }
 }
