@@ -13,3 +13,4 @@
 - Add message real hour
 - Add group viewer support
 - Style message
+- Dynamic message width
