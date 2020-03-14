@@ -28,6 +28,10 @@
       border-style: solid;
     }
 
+    .sender {
+      font-weight: bold;
+    }
+
     .date {
       display: inline-block;
       float: right;
@@ -36,6 +40,12 @@
       bottom: -6px;
       color: yellow;
       font-size: 12px;
+    }
+
+    .content {
+      display: inline-block;
+      font-family: inherit;
+      white-space: pre-line;
     }
 
     &.others {
