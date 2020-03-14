@@ -1,7 +1,13 @@
-import React from 'react'
+import React, { useLayoutEffect } from 'react'
+import { dateToLocateTimeString } from './utils'
 
-const Chat = ({ chat, selectedContact }) => {
+const Chat = ({ chat, selectedContact, scrollerRef }) => {
   const isGroup = chat.contacts.length > 2
+
+  useLayoutEffect(() => {
+    const scrollerElement = scrollerRef.current
+    scrollerElement.scrollTop = scrollerElement.scrollHeight
+  }, [scrollerRef])
 
   return (
     <>
@@ -14,8 +20,8 @@ const Chat = ({ chat, selectedContact }) => {
               selectedContact === msg.sender ? 'mine' : 'others'
             }`}
           >
-            <p className="content">{msg.message}</p>
-            <span className="date">14:00</span>
+            <span className="content">{msg.message}</span>
+            <span className="date">{dateToLocateTimeString(msg.date)}</span>
           </div>
         ))}
       </div>

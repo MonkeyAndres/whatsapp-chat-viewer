@@ -14,26 +14,60 @@
   grid-template-columns: 40px 1fr 1fr 1fr 1fr 1fr 40px;
   grid-template-rows: auto;
 
-  row-gap: 15px;
+  row-gap: 10px;
 
   .message {
-    padding: 1em;
+    padding: 10px;
     position: relative;
 
-    .date {
+    &:after {
       position: absolute;
-      bottom: 0.5em;
-      right: 0.8em;
+      content: '';
+      width: 0;
+      height: 0;
+      border-style: solid;
+    }
+
+    .date {
+      display: inline-block;
+      float: right;
+      padding: 0 0 0 7px;
+      position: relative;
+      bottom: -6px;
+      color: yellow;
+      font-size: 12px;
     }
 
     &.mine {
       background-color: green;
       grid-column: 4 / 7;
+
+      border-radius: 5px 0px 5px 5px;
+
+      justify-self: flex-end;
+
+      &::after {
+        border-width: 0px 0 10px 10px;
+        border-color: transparent transparent transparent green;
+        top: 0;
+        right: -10px;
+      }
     }
 
     &.others {
       background-color: grey;
       grid-column: 2 / 5;
+
+      border-radius: 0px 5px 5px 5px;
+
+      justify-self: flex-start;
+
+      &::after {
+        border-width: 0px 10px 10px 0;
+        border-color: transparent grey transparent transparent;
+        top: 0;
+        left: -10px;
+      }
     }
   }
 }
