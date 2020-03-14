@@ -27,3 +27,19 @@
     grid-area: paragraph-2;
   }
 }
+
+@media screen and (max-width: 1030px) {
+  .card.welcome {
+    grid-template-columns: 1fr;
+
+    grid-template-areas:
+      'title'
+      'paragraph-1'
+      'drop-file'
+      'paragraph-2';
+
+    .welcome-title {
+      text-align: center;
+    }
+  }
+}

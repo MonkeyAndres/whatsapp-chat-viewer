@@ -28,3 +28,13 @@
     }
   }
 }
+
+@media screen and (max-width: 1030px) {
+  .contact-selector {
+    grid-template-columns: 1fr;
+
+    .who-are-you {
+      grid-column: 1 / 2;
+    }
+  }
+}
