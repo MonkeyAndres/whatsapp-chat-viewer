@@ -1,0 +1,39 @@
+.chat-header {
+  background-color: blueviolet;
+  position: sticky;
+  top: 0;
+  right: 0;
+  z-index: 100;
+}
+
+.chat-grid {
+  margin: 1em 0;
+
+  display: grid;
+
+  grid-template-columns: 40px 1fr 1fr 1fr 1fr 1fr 40px;
+  grid-template-rows: auto;
+
+  row-gap: 15px;
+
+  .message {
+    padding: 1em;
+    position: relative;
+
+    .date {
+      position: absolute;
+      bottom: 0.5em;
+      right: 0.8em;
+    }
+
+    &.mine {
+      background-color: green;
+      grid-column: 4 / 7;
+    }
+
+    &.others {
+      background-color: grey;
+      grid-column: 2 / 5;
+    }
+  }
+}

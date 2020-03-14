@@ -3,6 +3,7 @@ import readBrowserFileContent from '../lib/readBrowserFileContent'
 import parseWhatsappChat from '../lib/whatsapp-parser'
 import ContactSelector from '../ui/main/ContactSelector'
 import { isNilOrEmpty } from './utils'
+import Chat from './Chat'
 
 const Main = ({ goBack, selectedFile }) => {
   const [chat, setChat] = useState()
@@ -35,7 +36,9 @@ const Main = ({ goBack, selectedFile }) => {
         />
       )}
 
-      {!isNilOrEmpty(selectedContact) && <p>Hello {selectedContact}</p>}
+      {!isNilOrEmpty(selectedContact) && (
+        <Chat chat={chat} selectedContact={selectedContact} />
+      )}
     </div>
   )
 }

@@ -15,10 +15,12 @@
 
     background: #fff;
     border-radius: 2px;
-    padding: 2em;
 
     grid-row: 2 / 4;
     grid-column: 2;
+
+    max-height: calc(100vh - 150px);
+    overflow: auto;
 
     transition: transform 500ms, opacity 300ms;
   }
