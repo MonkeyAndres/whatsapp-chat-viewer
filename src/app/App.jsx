@@ -1,8 +1,8 @@
 import React, { useState, useCallback } from 'react'
 import Layout from '../ui/shared/Layout'
 import WelcomeView from '../ui/welcome/WelcomeView'
-import { CSSTransition } from 'react-transition-group'
 import Main from './Main'
+import TransitionWrapper from './common/TransitionWrapper'
 
 const App = () => {
   const [selectedFile, setSelectedFile] = useState()
@@ -15,33 +15,13 @@ const App = () => {
 
   return (
     <Layout>
-      <CSSTransition
-        appear={!selectedFile}
-        in={!selectedFile}
-        timeout={{
-          enter: 600,
-          exit: 200
-        }}
-        classNames="welcome"
-        mountOnEnter
-        unmountOnExit
-      >
+      <TransitionWrapper appear={!selectedFile} animationType="from-left">
         <WelcomeView onSelectFile={onSelectFile} />
-      </CSSTransition>
+      </TransitionWrapper>
 
-      <CSSTransition
-        appear={!!selectedFile}
-        in={!!selectedFile}
-        timeout={{
-          enter: 600,
-          exit: 200
-        }}
-        classNames="main"
-        mountOnEnter
-        unmountOnExit
-      >
+      <TransitionWrapper appear={!!selectedFile} animationType="from-right">
         <Main goBack={goBack} selectedFile={selectedFile} />
-      </CSSTransition>
+      </TransitionWrapper>
     </Layout>
   )
 }
