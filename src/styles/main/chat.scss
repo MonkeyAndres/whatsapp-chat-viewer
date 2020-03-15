@@ -28,13 +28,19 @@
 
       .message-container-others {
         grid-column: 2 / 5;
-        justify-self: flex-start;
+
+        left: 0;
+        width: auto;
+
         padding: 5px 0;
       }
 
       .message-container-mine {
         grid-column: 4 / 7;
-        justify-self: flex-end;
+
+        right: 0;
+        width: auto;
+
         padding: 5px 0;
       }
 
