@@ -26,6 +26,18 @@
       grid-template-columns: 40px 1fr 1fr 1fr 1fr 1fr 40px;
       grid-template-rows: auto;
 
+      .message-container-others {
+        grid-column: 2 / 5;
+        justify-self: flex-start;
+        padding: 5px 0;
+      }
+
+      .message-container-mine {
+        grid-column: 4 / 7;
+        justify-self: flex-end;
+        padding: 5px 0;
+      }
+
       .message {
         padding: 10px;
         position: relative;
@@ -60,11 +72,7 @@
 
         &.others {
           background-color: grey;
-          grid-column: 2 / 5;
-
           border-radius: 0px 5px 5px 5px;
-
-          justify-self: flex-start;
 
           &::after {
             border-width: 0px 10px 10px 0;
@@ -75,12 +83,8 @@
         }
 
         &.mine {
-          background-color: green;
-          grid-column: 4 / 7;
-
           border-radius: 5px 0px 5px 5px;
-
-          justify-self: flex-end;
+          background-color: green;
 
           &::after {
             border-width: 0px 0 10px 10px;
@@ -103,15 +107,15 @@
     grid-template-columns: 20px 1fr 1fr 1fr 1fr 1fr 20px;
   }
 
+  .message-container-others {
+    grid-column: 2 / 6 !important;
+  }
+
+  .message-container-mine {
+    grid-column: 3 / 7 !important;
+  }
+
   .message {
     font-size: 14px;
-
-    &.others {
-      grid-column: 2 / 6 !important;
-    }
-
-    &.mine {
-      grid-column: 3 / 7 !important;
-    }
   }
 }
