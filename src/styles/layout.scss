@@ -11,7 +11,7 @@
   }
 
   .card {
-    transform: translateX(-800px);
+    align-self: flex-start;
 
     background: #fff;
     border-radius: 2px;
@@ -23,31 +23,6 @@
     overflow: auto;
 
     transition: transform 500ms, opacity 300ms;
-  }
-
-  .card-enter,
-  .card-appear {
-    transform: translateX(-800px);
-    opacity: 0;
-    transition-delay: 300ms;
-  }
-  .card-enter-active,
-  .card-appear-active {
-    transform: translateX(0);
-    opacity: 1;
-  }
-
-  .card-enter-done {
-    transform: translateX(0);
-  }
-
-  .card-exit {
-    transform: translateX(0);
-    opacity: 1;
-  }
-  .card-exit-active {
-    transform: translateX(800px);
-    opacity: 0;
   }
 }
 

@@ -1,0 +1,28 @@
+.main {
+  transform: translateX(800px);
+}
+
+.main-enter,
+.main-appear {
+  transform: translateX(800px);
+  opacity: 0;
+  transition-delay: 300ms;
+}
+.main-enter-active,
+.main-appear-active {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.main-enter-done {
+  transform: translateX(0);
+}
+
+.main-exit {
+  transform: translateX(0);
+  opacity: 1;
+}
+.main-exit-active {
+  transform: translateX(800px);
+  opacity: 0;
+}

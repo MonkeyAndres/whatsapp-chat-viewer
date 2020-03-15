@@ -4,6 +4,16 @@
   top: 0;
   right: 0;
   z-index: 100;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 10px 40px;
+
+  .back-button {
+    cursor: pointer;
+  }
 }
 
 .chat-grid {
@@ -83,6 +93,10 @@
 }
 
 @media screen and (max-width: 1030px) {
+  .chat-header {
+    padding: 10px 20px;
+  }
+
   .chat-grid {
     grid-template-columns: 20px 1fr 1fr 1fr 1fr 1fr 20px;
   }

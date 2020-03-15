@@ -1,0 +1,28 @@
+.welcome {
+  transform: translateX(-800px);
+}
+
+.welcome-enter,
+.welcome-appear {
+  transform: translateX(-800px);
+  opacity: 0;
+  transition-delay: 300ms;
+}
+.welcome-enter-active,
+.welcome-appear-active {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.welcome-enter-done {
+  transform: translateX(0);
+}
+
+.welcome-exit {
+  transform: translateX(0);
+  opacity: 1;
+}
+.welcome-exit-active {
+  transform: translateX(-800px);
+  opacity: 0;
+}

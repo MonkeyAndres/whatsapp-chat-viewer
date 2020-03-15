@@ -51,6 +51,7 @@ const Main = ({ goBack, selectedFile }) => {
           chat={chat}
           selectedContact={selectedContact}
           scrollerRef={scrollerRef}
+          goBack={goBack}
         />
       )}
     </div>

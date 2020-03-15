@@ -22,7 +22,7 @@ const App = () => {
           enter: 600,
           exit: 200
         }}
-        classNames="card"
+        classNames="welcome"
         mountOnEnter
         unmountOnExit
       >
@@ -36,7 +36,7 @@ const App = () => {
           enter: 600,
           exit: 200
         }}
-        classNames="card"
+        classNames="main"
         mountOnEnter
         unmountOnExit
       >
