@@ -1,10 +1,10 @@
 .main {
-  transform: translateX(800px);
+  transform: translateX($container_max_width);
 }
 
 .main-enter,
 .main-appear {
-  transform: translateX(800px);
+  transform: translateX($container_max_width);
   opacity: 0;
   transition-delay: 300ms;
 }
@@ -23,6 +23,6 @@
   opacity: 1;
 }
 .main-exit-active {
-  transform: translateX(800px);
+  transform: translateX($container_max_width);
   opacity: 0;
 }

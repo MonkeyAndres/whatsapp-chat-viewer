@@ -29,7 +29,7 @@
   }
 }
 
-@media screen and (max-width: 1030px) {
+@media screen and (max-width: $mobile_breakpoint) {
   .contact-selector {
     grid-template-columns: 1fr;
 

@@ -92,7 +92,7 @@
   }
 }
 
-@media screen and (max-width: 1030px) {
+@media screen and (max-width: $mobile_breakpoint) {
   .chat-header {
     padding: 10px 20px;
   }

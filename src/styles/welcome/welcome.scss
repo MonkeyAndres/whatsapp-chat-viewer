@@ -28,7 +28,7 @@
   }
 }
 
-@media screen and (max-width: 1030px) {
+@media screen and (max-width: $mobile_breakpoint) {
   .card.welcome {
     grid-template-columns: 1fr;
 

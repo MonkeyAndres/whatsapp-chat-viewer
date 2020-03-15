@@ -1,10 +1,10 @@
 .welcome {
-  transform: translateX(-800px);
+  transform: translateX(-$container_max_width);
 }
 
 .welcome-enter,
 .welcome-appear {
-  transform: translateX(-800px);
+  transform: translateX(-$container_max_width);
   opacity: 0;
   transition-delay: 300ms;
 }
@@ -23,6 +23,6 @@
   opacity: 1;
 }
 .welcome-exit-active {
-  transform: translateX(-800px);
+  transform: translateX(-$container_max_width);
   opacity: 0;
 }
