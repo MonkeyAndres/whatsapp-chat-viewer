@@ -17,6 +17,14 @@ const Main = ({ goBack, selectedFile }) => {
 
         setChat(chat)
 
+        // Auto-select who are you based on chat header
+        if (chat.contacts.length === 2) {
+          const [contact] = chat.contacts.filter(
+            contact => contact !== chat.header
+          )
+          setSelectedContact(contact)
+        }
+
         console.log(chat)
       } catch (error) {
         console.log({ error })
