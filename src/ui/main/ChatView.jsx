@@ -1,26 +1,16 @@
 import React from 'react'
-import ChatMessage from './ChatMessage'
 
-const ChatView = ({ chat, selectedContact, goBack }) => {
-  const isGroup = chat.contacts.length > 2
-
+const ChatView = ({ header, goBack, chatContentSlot }) => {
   return (
     <>
       <div className="chat-header">
-        <h1>{chat.header}</h1>
+        <h1>{header}</h1>
         <span className="back-button" onClick={goBack}>
           Go back
         </span>
       </div>
-      <div className="chat-grid">
-        {chat.messages.map((msg, i) => {
-          const isMine = selectedContact === msg.sender
 
-          return (
-            <ChatMessage key={i} msg={msg} isMine={isMine} isGroup={isGroup} />
-          )
-        })}
-      </div>
+      <div className="chat-container">{chatContentSlot}</div>
     </>
   )
 }

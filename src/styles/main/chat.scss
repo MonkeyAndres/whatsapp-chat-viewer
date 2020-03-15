@@ -1,92 +1,94 @@
-.chat-header {
-  background-color: blueviolet;
-  position: sticky;
-  top: 0;
-  right: 0;
-  z-index: 100;
-
+.card.chat {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-flow: column;
+  height: 100vh;
 
-  padding: 10px 40px;
+  .chat-header {
+    background-color: blueviolet;
 
-  .back-button {
-    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 10px 40px;
+
+    .back-button {
+      cursor: pointer;
+    }
   }
-}
 
-.chat-grid {
-  margin: 1em 0;
+  .chat-container {
+    flex-grow: 1;
 
-  display: grid;
+    .ReactVirtualized__Grid__innerScrollContainer {
+      display: grid;
 
-  grid-template-columns: 40px 1fr 1fr 1fr 1fr 1fr 40px;
-  grid-template-rows: auto;
+      grid-template-columns: 40px 1fr 1fr 1fr 1fr 1fr 40px;
+      grid-template-rows: auto;
 
-  row-gap: 10px;
+      .message {
+        padding: 10px;
+        position: relative;
 
-  .message {
-    padding: 10px;
-    position: relative;
+        &:after {
+          position: absolute;
+          content: '';
+          width: 0;
+          height: 0;
+          border-style: solid;
+        }
 
-    &:after {
-      position: absolute;
-      content: '';
-      width: 0;
-      height: 0;
-      border-style: solid;
-    }
+        .sender {
+          font-weight: bold;
+        }
 
-    .sender {
-      font-weight: bold;
-    }
+        .date {
+          display: inline-block;
+          float: right;
+          padding: 0 0 0 7px;
+          position: relative;
+          bottom: -6px;
+          color: yellow;
+          font-size: 12px;
+        }
 
-    .date {
-      display: inline-block;
-      float: right;
-      padding: 0 0 0 7px;
-      position: relative;
-      bottom: -6px;
-      color: yellow;
-      font-size: 12px;
-    }
+        .content {
+          display: inline-block;
+          font-family: inherit;
+          white-space: pre-line;
+        }
 
-    .content {
-      display: inline-block;
-      font-family: inherit;
-      white-space: pre-line;
-    }
+        &.others {
+          background-color: grey;
+          grid-column: 2 / 5;
 
-    &.others {
-      background-color: grey;
-      grid-column: 2 / 5;
+          border-radius: 0px 5px 5px 5px;
 
-      border-radius: 0px 5px 5px 5px;
+          justify-self: flex-start;
 
-      justify-self: flex-start;
+          &::after {
+            border-width: 0px 10px 10px 0;
+            border-color: transparent grey transparent transparent;
+            top: 0;
+            left: -10px;
+          }
+        }
 
-      &::after {
-        border-width: 0px 10px 10px 0;
-        border-color: transparent grey transparent transparent;
-        top: 0;
-        left: -10px;
-      }
-    }
+        &.mine {
+          background-color: green;
+          grid-column: 4 / 7;
 
-    &.mine {
-      background-color: green;
-      grid-column: 4 / 7;
+          border-radius: 5px 0px 5px 5px;
 
-      border-radius: 5px 0px 5px 5px;
+          justify-self: flex-end;
 
-      justify-self: flex-end;
-
-      &::after {
-        border-width: 0px 0 10px 10px;
-        border-color: transparent transparent transparent green;
-        top: 0;
-        right: -10px;
+          &::after {
+            border-width: 0px 0 10px 10px;
+            border-color: transparent transparent transparent green;
+            top: 0;
+            right: -10px;
+          }
+        }
       }
     }
   }

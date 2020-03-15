@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import readBrowserFileContent from '../lib/readBrowserFileContent'
 import parseWhatsappChat from '../lib/whatsapp-parser'
 import ContactSelector from '../ui/main/ContactSelector'
@@ -12,6 +12,8 @@ const Main = ({ goBack, selectedFile }) => {
   useEffect(() => {
     ;(async function() {
       try {
+        if (!selectedFile) return
+
         const data = await readBrowserFileContent(selectedFile)
         const chat = parseWhatsappChat(data)
 
@@ -33,11 +35,13 @@ const Main = ({ goBack, selectedFile }) => {
     })()
   }, [goBack, selectedFile])
 
-  const scrollerRef = useRef()
-
   return (
-    <div className="card main" ref={scrollerRef}>
-      {isNilOrEmpty(chat) && <p>Loading...</p>}
+    <>
+      {isNilOrEmpty(chat) && (
+        <div className="card">
+          <p>Loading...</p>
+        </div>
+      )}
 
       {isNilOrEmpty(selectedContact) && !isNilOrEmpty(chat) && (
         <ContactSelector
@@ -47,14 +51,9 @@ const Main = ({ goBack, selectedFile }) => {
       )}
 
       {!isNilOrEmpty(selectedContact) && (
-        <Chat
-          chat={chat}
-          selectedContact={selectedContact}
-          scrollerRef={scrollerRef}
-          goBack={goBack}
-        />
+        <Chat chat={chat} selectedContact={selectedContact} goBack={goBack} />
       )}
-    </div>
+    </>
   )
 }
 
