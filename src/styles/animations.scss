@@ -1,0 +1,73 @@
+// Left to right and exit reverse
+.from-left-enter,
+.from-left-appear {
+  transform: translateX(-$container_max_width);
+  opacity: 0;
+  transition-delay: 300ms;
+}
+.from-left-enter-active,
+.from-left-appear-active {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.from-left-enter-done {
+  transform: translateX(0);
+}
+
+.from-left-exit {
+  transform: translateX(0);
+  opacity: 1;
+}
+.from-left-exit-active {
+  transform: translateX(-$container_max_width);
+  opacity: 0;
+}
+
+// Right to left and exit reverse
+.from-right-enter,
+.from-right-appear {
+  transform: translateX($container_max_width);
+  opacity: 0;
+  transition-delay: 300ms;
+}
+.from-right-enter-active,
+.from-right-appear-active {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.from-right-enter-done {
+  transform: translateX(0);
+}
+
+.from-right-exit {
+  transform: translateX(0);
+  opacity: 1;
+}
+.from-right-exit-active {
+  transform: translateX($container_max_width);
+  opacity: 0;
+}
+
+// Fade
+.fade-enter,
+.fade-appear {
+  opacity: 0;
+  transition-delay: 300ms;
+}
+.fade-enter-active,
+.fade-appear-active {
+  opacity: 1;
+}
+
+.fade-enter-done {
+  opacity: 1;
+}
+
+.fade-exit {
+  opacity: 1;
+}
+.fade-exit-active {
+  opacity: 0;
+}
