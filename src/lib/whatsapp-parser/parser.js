@@ -31,9 +31,9 @@ export const parseMessages = input => {
 
   const messages = input.match(new RegExp(WHATSAPP_MESSAGE_REGEXP, 'g'))
 
-  const parsedMessages = messages.map(msg => {
+  const parsedMessages = messages.map((msg, index) => {
     const [, date, hour, sender, message] = msg.match(WHATSAPP_MESSAGE_REGEXP)
-    return { date: getDateByStrings(date, hour), sender, message }
+    return { id: index, date: getDateByStrings(date, hour), sender, message }
   })
 
   return parsedMessages
