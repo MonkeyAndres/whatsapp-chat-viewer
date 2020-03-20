@@ -1,68 +1,24 @@
-import React, { useCallback } from 'react'
+import React, { useRef, useLayoutEffect } from 'react'
 import ChatView from '../ui/main/ChatView'
-import {
-  CellMeasurerCache,
-  CellMeasurer,
-  AutoSizer,
-  List
-} from 'react-virtualized'
-import ChatMessage from '../ui/main/ChatMessage'
 
 const Chat = ({ chat, selectedContact, goBack }) => {
   const isGroup = chat.contacts.length > 2
 
-  const cellMeasureCache = new CellMeasurerCache({
-    fixedWidth: true,
-    defaultHeight: 40
-  })
+  const scrollerRef = useRef()
 
-  const rowRenderer = useCallback(
-    ({ key, index, style, parent }) => {
-      const message = chat.messages[index]
-      const isMine = selectedContact === message.sender
-
-      return (
-        <CellMeasurer
-          key={key}
-          cache={cellMeasureCache}
-          parent={parent}
-          columnIndex={0}
-          rowIndex={index}
-        >
-          <ChatMessage
-            style={style}
-            msg={message}
-            isMine={isMine}
-            isGroup={isGroup}
-          />
-        </CellMeasurer>
-      )
-    },
-    [cellMeasureCache, chat.messages, isGroup, selectedContact]
-  )
+  useLayoutEffect(() => {
+    const element = scrollerRef.current
+    element.scrollTop = element.scrollHeight
+  }, [])
 
   return (
-    <div className="card chat">
+    <div className="card chat" ref={scrollerRef}>
       <ChatView
-        header={chat.header}
+        header={chat?.header}
+        messages={chat?.messages}
+        isGroup={isGroup}
+        selectedContact={selectedContact}
         goBack={goBack}
-        chatContentSlot={
-          <AutoSizer>
-            {({ height, width }) => (
-              <List
-                height={height}
-                width={width}
-                rowCount={chat.messages.length}
-                deferredMeasurementCache={cellMeasureCache}
-                rowHeight={cellMeasureCache.rowHeight}
-                rowRenderer={rowRenderer}
-                overscanRowCount={100}
-                estimatedRowSize={40}
-                scrollToIndex={chat.messages.length}
-              />
-            )}
-          </AutoSizer>
-        }
       />
     </div>
   )

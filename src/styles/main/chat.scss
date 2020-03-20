@@ -1,104 +1,90 @@
-.card.chat {
+.chat-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+
+  background-color: blueviolet;
+
   display: flex;
-  flex-flow: column;
-  height: 100vh;
+  justify-content: space-between;
+  align-items: center;
 
-  .chat-header {
-    background-color: blueviolet;
+  padding: 10px 40px;
 
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    padding: 10px 40px;
-
-    .back-button {
-      cursor: pointer;
-    }
+  .back-button {
+    cursor: pointer;
   }
+}
 
-  .chat-container {
-    flex-grow: 1;
+.chat-grid {
+  display: grid;
 
-    .ReactVirtualized__Grid__innerScrollContainer {
-      display: grid;
+  grid-template-columns: 40px 1fr 1fr 1fr 1fr 1fr 40px;
+  grid-template-rows: auto;
 
-      grid-template-columns: 40px 1fr 1fr 1fr 1fr 1fr 40px;
-      grid-template-rows: auto;
+  row-gap: 10px;
 
-      .message-container-others {
-        grid-column: 2 / 5;
+  padding: 20px 0;
 
-        left: 0;
-        width: auto;
+  .message {
+    padding: 10px;
+    position: relative;
 
-        padding: 5px 0;
+    &:after {
+      position: absolute;
+      content: '';
+      width: 0;
+      height: 0;
+      border-style: solid;
+    }
+
+    .sender {
+      font-weight: bold;
+    }
+
+    .date {
+      display: inline-block;
+      float: right;
+      padding: 0 0 0 7px;
+      position: relative;
+      bottom: -6px;
+      color: yellow;
+      font-size: 12px;
+    }
+
+    .content {
+      display: inline-block;
+      font-family: inherit;
+      white-space: pre-line;
+    }
+
+    &.others {
+      grid-column: 2 / 5;
+      justify-self: flex-start;
+
+      background-color: grey;
+      border-radius: 0px 5px 5px 5px;
+
+      &::after {
+        border-width: 0px 10px 10px 0;
+        border-color: transparent grey transparent transparent;
+        top: 0;
+        left: -10px;
       }
+    }
 
-      .message-container-mine {
-        grid-column: 4 / 7;
+    &.mine {
+      grid-column: 4 / 7;
+      justify-self: flex-end;
 
-        right: 0;
-        width: auto;
+      border-radius: 5px 0px 5px 5px;
+      background-color: green;
 
-        padding: 5px 0;
-      }
-
-      .message {
-        padding: 10px;
-        position: relative;
-
-        &:after {
-          position: absolute;
-          content: '';
-          width: 0;
-          height: 0;
-          border-style: solid;
-        }
-
-        .sender {
-          font-weight: bold;
-        }
-
-        .date {
-          display: inline-block;
-          float: right;
-          padding: 0 0 0 7px;
-          position: relative;
-          bottom: -6px;
-          color: yellow;
-          font-size: 12px;
-        }
-
-        .content {
-          display: inline-block;
-          font-family: inherit;
-          white-space: pre-line;
-        }
-
-        &.others {
-          background-color: grey;
-          border-radius: 0px 5px 5px 5px;
-
-          &::after {
-            border-width: 0px 10px 10px 0;
-            border-color: transparent grey transparent transparent;
-            top: 0;
-            left: -10px;
-          }
-        }
-
-        &.mine {
-          border-radius: 5px 0px 5px 5px;
-          background-color: green;
-
-          &::after {
-            border-width: 0px 0 10px 10px;
-            border-color: transparent transparent transparent green;
-            top: 0;
-            right: -10px;
-          }
-        }
+      &::after {
+        border-width: 0px 0 10px 10px;
+        border-color: transparent transparent transparent green;
+        top: 0;
+        right: -10px;
       }
     }
   }
@@ -111,14 +97,16 @@
 
   .chat-grid {
     grid-template-columns: 20px 1fr 1fr 1fr 1fr 1fr 20px;
-  }
 
-  .message-container-others {
-    grid-column: 2 / 6 !important;
-  }
+    .message {
+      &.others {
+        grid-column: 2 / 6;
+      }
 
-  .message-container-mine {
-    grid-column: 3 / 7 !important;
+      &.mine {
+        grid-column: 3 / 7;
+      }
+    }
   }
 
   .message {
