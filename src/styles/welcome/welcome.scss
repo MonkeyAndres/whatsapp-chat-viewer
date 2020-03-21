@@ -21,10 +21,28 @@
 
   .paragraph-1 {
     grid-area: paragraph-1;
+    padding-right: 10px;
+
+    p {
+      font-size: 18px;
+    }
   }
 
   .paragraph-2 {
     grid-area: paragraph-2;
+
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-weight: lighter;
+      margin: 15px 0;
+    }
+
+    p {
+      font-size: 18px;
+    }
   }
 }
 
