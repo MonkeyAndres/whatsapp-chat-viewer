@@ -9,9 +9,24 @@
   row-gap: 15px;
 
   .who-are-you {
-    font-weight: lighter;
+    display: flex;
+
+    align-items: center;
+
     grid-column: 1 / 3;
     margin-bottom: 10px;
+
+    .back-arrow {
+      width: 35px;
+      height: 35px;
+      cursor: pointer;
+    }
+
+    .text {
+      font-weight: lighter;
+      font-size: 35px;
+      margin-left: 15px;
+    }
   }
 
   .contact {
@@ -31,10 +46,20 @@
 
 @media screen and (max-width: $mobile_breakpoint) {
   .contact-selector {
+    align-content: flex-start;
     grid-template-columns: 1fr;
 
     .who-are-you {
       grid-column: 1 / 2;
+
+      .back-arrow {
+        width: 25px;
+        height: 25px;
+      }
+
+      .text {
+        font-size: 25px;
+      }
     }
   }
 }

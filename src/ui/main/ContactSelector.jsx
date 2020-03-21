@@ -1,9 +1,14 @@
 import React from 'react'
+import { ReactComponent as BackArrow } from '../../assets/icons/arrow-left.svg'
 
-const ContactSelector = ({ contacts, onSelectContact }) => {
+const ContactSelector = ({ contacts, onSelectContact, goBack }) => {
   return (
     <div className="card contact-selector">
-      <h1 className="who-are-you">Select who you are.</h1>
+      <div className="who-are-you">
+        <BackArrow className="back-arrow" onClick={goBack} />
+        <span className="text">Select who you are.</span>
+      </div>
+
       {contacts.map(contact => (
         <button
           className="contact"

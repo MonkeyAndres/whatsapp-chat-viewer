@@ -39,6 +39,7 @@ const Main = ({ goBack, selectedFile }) => {
         <ContactSelector
           contacts={chat.contacts}
           onSelectContact={setSelectedContact}
+          goBack={goBack}
         />
       )}
 
