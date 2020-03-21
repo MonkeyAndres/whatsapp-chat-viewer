@@ -1,7 +1,6 @@
 import React from 'react'
-import ChatMessage from './ChatMessage'
 
-const ChatView = ({ header, messages, isGroup, selectedContact, goBack }) => {
+const ChatView = ({ header, goBack, chatSlot }) => {
   return (
     <>
       <div className="chat-header">
@@ -11,20 +10,7 @@ const ChatView = ({ header, messages, isGroup, selectedContact, goBack }) => {
         </span>
       </div>
 
-      <div className="chat-grid">
-        {messages.map(msg => {
-          const isMine = msg.sender === selectedContact
-
-          return (
-            <ChatMessage
-              key={msg.id}
-              msg={msg}
-              isMine={isMine}
-              isGroup={isGroup}
-            />
-          )
-        })}
-      </div>
+      <div className="chat-grid">{chatSlot}</div>
     </>
   )
 }
