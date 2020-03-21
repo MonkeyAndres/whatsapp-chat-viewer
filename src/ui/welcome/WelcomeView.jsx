@@ -32,6 +32,12 @@ const WelcomeView = ({ onSelectFile }) => {
           sequi laboriosam est, dicta assumenda aliquid, inventore animi
           asperiores velit non?
         </p>
+        <p>
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Obcaecati
+          repellat corporis incidunt itaque similique, nam quod illo esse amet
+          sequi laboriosam est, dicta assumenda aliquid, inventore animi
+          asperiores velit non?
+        </p>
       </div>
     </div>
   )
