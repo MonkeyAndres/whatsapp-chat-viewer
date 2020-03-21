@@ -1,49 +1,42 @@
-import React, { useState, useEffect } from 'react'
-import readBrowserFileContent from '../lib/readBrowserFileContent'
-import parseWhatsappChat from '../lib/whatsapp-parser'
+import React from 'react'
 import ContactSelector from '../ui/main/ContactSelector'
 import { isNilOrEmpty } from './utils'
 import Chat from './Chat'
+import Spinner from '../ui/shared/Spinner'
+import useMainState from './useMainState'
+import ErrorMessage from '../ui/main/ErrorMessage'
 
-const Main = ({ goBack, selectedFile }) => {
-  const [chat, setChat] = useState()
-  const [selectedContact, setSelectedContact] = useState()
+const Main = ({ selectedFile, goBack }) => {
+  const {
+    chat,
+    loading,
+    error,
+    selectedContact,
+    setSelectedContact
+  } = useMainState(selectedFile)
 
-  useEffect(() => {
-    ;(async function() {
-      try {
-        if (!selectedFile) return
-
-        const data = await readBrowserFileContent(selectedFile)
-        const chat = parseWhatsappChat(data)
-
-        setChat(chat)
-
-        console.log(chat)
-      } catch (error) {
-        console.log({ error })
-        goBack()
-      }
-    })()
-  }, [goBack, selectedFile])
+  const hasError = !isNilOrEmpty(error) && !loading
+  const hasSelectedContact = !isNilOrEmpty(selectedContact)
 
   return (
     <>
-      {isNilOrEmpty(chat) && (
-        <div className="card">
-          <p>Loading...</p>
+      {loading && (
+        <div className="card loader">
+          <Spinner />
         </div>
       )}
 
-      {isNilOrEmpty(selectedContact) && !isNilOrEmpty(chat) && (
+      {hasError && <ErrorMessage error={error} goBack={goBack} />}
+
+      {!hasSelectedContact && !hasError && (
         <ContactSelector
-          contacts={chat.contacts}
+          contacts={chat?.contacts || []}
           onSelectContact={setSelectedContact}
           goBack={goBack}
         />
       )}
 
-      {!isNilOrEmpty(selectedContact) && (
+      {hasSelectedContact && (
         <Chat chat={chat} selectedContact={selectedContact} goBack={goBack} />
       )}
     </>

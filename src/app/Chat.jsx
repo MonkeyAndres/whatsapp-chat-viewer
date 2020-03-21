@@ -4,6 +4,7 @@ import ChatMessage from '../ui/main/ChatMessage'
 import VisibilitySensor from 'react-visibility-sensor'
 import { useCallback } from 'react'
 import useChatState from './useChatState'
+import Spinner from '../ui/shared/Spinner'
 
 const Chat = ({ chat, selectedContact, goBack }) => {
   const {
@@ -44,10 +45,7 @@ const Chat = ({ chat, selectedContact, goBack }) => {
             {hasMoreMessages && (
               <VisibilitySensor onChange={loadPrevious} delayedCall={true}>
                 <div className="loader">
-                  <img
-                    src="https://i.gifer.com/origin/34/34338d26023e5515f6cc8969aa027bca_w200.gif"
-                    alt="loader"
-                  />
+                  <Spinner />
                 </div>
               </VisibilitySensor>
             )}
