@@ -30,7 +30,12 @@
 
 @media screen and (max-width: $mobile_breakpoint) {
   .card.welcome {
+    padding: 2em 1.5em;
+
     grid-template-columns: 1fr;
+    grid-template-rows: auto auto 150px auto;
+
+    align-content: flex-start;
 
     grid-template-areas:
       'title'
