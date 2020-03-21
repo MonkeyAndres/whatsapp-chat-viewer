@@ -2,7 +2,6 @@ import React from 'react'
 import ContactSelector from '../ui/main/ContactSelector'
 import { isNilOrEmpty } from './utils'
 import Chat from './Chat'
-import Spinner from '../ui/shared/Spinner'
 import useMainState from './useMainState'
 import ErrorMessage from '../ui/main/ErrorMessage'
 
@@ -20,12 +19,6 @@ const Main = ({ selectedFile, goBack }) => {
 
   return (
     <>
-      {loading && (
-        <div className="card loader">
-          <Spinner />
-        </div>
-      )}
-
       {hasError && <ErrorMessage error={error} goBack={goBack} />}
 
       {!hasSelectedContact && !hasError && (
