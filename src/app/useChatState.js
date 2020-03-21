@@ -10,10 +10,10 @@ const initState = ({ chat, messagesPerPage }) => {
     allMessages,
     messagesPerPage,
     messages: filteredMessages,
-    messageRefs: allMessages.reduce(
-      (acc, msg) => ({ ...acc, [msg.id]: React.createRef() }),
-      {}
-    ),
+    messageRefs: allMessages.reduce((acc, msg) => {
+      acc[msg.id] = React.createRef()
+      return acc
+    }, {}),
     hasMoreMessages: allMessages.length !== filteredMessages.length,
     isGroupChat: chat.contacts.length > 2,
     page: 1
