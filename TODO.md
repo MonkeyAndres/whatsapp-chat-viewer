@@ -10,4 +10,3 @@
 ## Chat Screen
 
 - Add message date indicator
-- Add group viewer support
