@@ -10,3 +10,4 @@
 ## Chat Screen
 
 - Add message date indicator
+- Start from the top
