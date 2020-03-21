@@ -28,8 +28,14 @@
 
   .loader {
     grid-column: 1 / 8;
-    background-color: orange;
-    height: 100px;
+    height: 50px;
+    padding: 15px 0;
+
+    img {
+      display: block;
+      height: 100%;
+      margin: 0 auto;
+    }
   }
 
   .message {
