@@ -2,10 +2,9 @@
 
 - Take a color palette (need help)
 - Rethink as a state machine
+- Fix responsive design
 
 ## Welcome
-
-- Add explanatory texts
 
 ## Chat Screen
 
