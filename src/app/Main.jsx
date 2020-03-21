@@ -18,6 +18,8 @@ const Main = ({ goBack, selectedFile }) => {
         const chat = parseWhatsappChat(data)
 
         setChat(chat)
+
+        console.log(chat)
       } catch (error) {
         console.log({ error })
         goBack()

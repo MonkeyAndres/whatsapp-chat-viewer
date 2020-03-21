@@ -1,6 +1,7 @@
 # TODO
 
 - Take a color palette (need help)
+- Rethink as a state machine
 
 ## Welcome
 
