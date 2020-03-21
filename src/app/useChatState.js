@@ -1,6 +1,11 @@
 import React, { useReducer, useLayoutEffect, useCallback } from 'react'
 import * as R from 'ramda'
 
+const referenceCreator = (acc, msg) => {
+  acc[msg.id] = React.createRef()
+  return acc
+}
+
 const initState = ({ chat, messagesPerPage }) => {
   const allMessages = chat.messages
 
@@ -10,10 +15,7 @@ const initState = ({ chat, messagesPerPage }) => {
     allMessages,
     messagesPerPage,
     messages: filteredMessages,
-    messageRefs: allMessages.reduce((acc, msg) => {
-      acc[msg.id] = React.createRef()
-      return acc
-    }, {}),
+    messageRefs: filteredMessages.reduce(referenceCreator, {}),
     hasMoreMessages: allMessages.length !== filteredMessages.length,
     isGroupChat: chat.contacts.length > 2,
     page: 1
@@ -24,15 +26,21 @@ const reducer = (state, action) => {
   switch (action.type) {
     case 'loadPrevious': {
       const nextPage = state.page + 1
-      const nextMessages = R.takeLast(
-        state.messagesPerPage * nextPage,
+
+      const allMessagesLength = state.allMessages.length
+      const nextMessages = R.slice(
+        allMessagesLength - nextPage * state.messagesPerPage,
+        allMessagesLength - state.page * state.messagesPerPage,
         state.allMessages
       )
+
+      const nextMessagesRefs = nextMessages.reduce(referenceCreator, {})
 
       return {
         ...state,
         page: nextPage,
-        messages: nextMessages,
+        messages: R.concat(nextMessages, state.messages),
+        messageRefs: R.mergeAll([nextMessagesRefs, state.messageRefs]),
         hasMoreMessages: state.allMessages.length !== nextMessages.length
       }
     }
