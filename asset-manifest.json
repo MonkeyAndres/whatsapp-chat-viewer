@@ -1,24 +1,24 @@
 {
   "files": {
     "main.css": "/whatsapp-chat-viewer/static/css/main.eae3616a.chunk.css",
-    "main.js": "/whatsapp-chat-viewer/static/js/main.30c19f00.chunk.js",
-    "main.js.map": "/whatsapp-chat-viewer/static/js/main.30c19f00.chunk.js.map",
+    "main.js": "/whatsapp-chat-viewer/static/js/main.f3bb9dc8.chunk.js",
+    "main.js.map": "/whatsapp-chat-viewer/static/js/main.f3bb9dc8.chunk.js.map",
     "runtime-main.js": "/whatsapp-chat-viewer/static/js/runtime-main.fa9495f7.js",
     "runtime-main.js.map": "/whatsapp-chat-viewer/static/js/runtime-main.fa9495f7.js.map",
-    "static/js/2.1b4d4a47.chunk.js": "/whatsapp-chat-viewer/static/js/2.1b4d4a47.chunk.js",
-    "static/js/2.1b4d4a47.chunk.js.map": "/whatsapp-chat-viewer/static/js/2.1b4d4a47.chunk.js.map",
+    "static/js/2.b1fac76e.chunk.js": "/whatsapp-chat-viewer/static/js/2.b1fac76e.chunk.js",
+    "static/js/2.b1fac76e.chunk.js.map": "/whatsapp-chat-viewer/static/js/2.b1fac76e.chunk.js.map",
     "index.html": "/whatsapp-chat-viewer/index.html",
-    "precache-manifest.d460936bb549cf2a5e12ea719d7f669e.js": "/whatsapp-chat-viewer/precache-manifest.d460936bb549cf2a5e12ea719d7f669e.js",
+    "precache-manifest.3db4d985f10b3b58b2302b3cef979e7d.js": "/whatsapp-chat-viewer/precache-manifest.3db4d985f10b3b58b2302b3cef979e7d.js",
     "service-worker.js": "/whatsapp-chat-viewer/service-worker.js",
     "static/css/main.eae3616a.chunk.css.map": "/whatsapp-chat-viewer/static/css/main.eae3616a.chunk.css.map",
-    "static/js/2.1b4d4a47.chunk.js.LICENSE.txt": "/whatsapp-chat-viewer/static/js/2.1b4d4a47.chunk.js.LICENSE.txt",
+    "static/js/2.b1fac76e.chunk.js.LICENSE.txt": "/whatsapp-chat-viewer/static/js/2.b1fac76e.chunk.js.LICENSE.txt",
     "static/media/arrow-left.3b5d5b59.svg": "/whatsapp-chat-viewer/static/media/arrow-left.3b5d5b59.svg",
     "static/media/upload.749f1ba7.svg": "/whatsapp-chat-viewer/static/media/upload.749f1ba7.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.fa9495f7.js",
-    "static/js/2.1b4d4a47.chunk.js",
+    "static/js/2.b1fac76e.chunk.js",
     "static/css/main.eae3616a.chunk.css",
-    "static/js/main.30c19f00.chunk.js"
+    "static/js/main.f3bb9dc8.chunk.js"
   ]
 }
