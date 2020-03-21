@@ -1,22 +1,39 @@
 .chat-header {
   position: sticky;
   top: 0;
+  left: 0;
   z-index: 100;
+  width: 100%;
 
   background-color: blueviolet;
 
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
   padding: 10px 40px;
 
-  .back-button {
+  display: flex;
+  align-items: center;
+
+  .back-arrow {
+    width: 35px;
+    height: 35px;
     cursor: pointer;
+  }
+
+  .header-text {
+    display: block;
+    width: 100%;
+
+    font-size: 35px;
+    font-weight: normal;
+    margin-left: 15px;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
 
 .chat-grid {
+  overflow-x: hidden;
   display: grid;
 
   grid-template-columns: 40px 1fr 1fr 1fr 1fr 1fr 40px;
