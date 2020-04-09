@@ -3,14 +3,14 @@ import { ReactComponent as BackArrow } from '../../assets/icons/arrow-left.svg'
 
 const ChatView = ({ header, goBack, chatSlot }) => {
   return (
-    <>
-      <div className="chat-header">
+    <div className="chatView">
+      <div className="chatView-header">
         <BackArrow className="back-arrow" onClick={goBack} />
-        <span className="header-text">{header}</span>
+        <h3 className="header-text">{header}</h3>
       </div>
 
-      <div className="chat-grid">{chatSlot}</div>
-    </>
+      <div className="chatView-container">{chatSlot}</div>
+    </div>
   )
 }
 

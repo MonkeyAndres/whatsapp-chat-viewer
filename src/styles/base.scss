@@ -1,13 +1,20 @@
-* {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  box-sizing: border-box;
+@import url('https://fonts.googleapis.com/css?family=Hind+Madurai|Montserrat:700&display=swap');
+
+html,
+body,
+#root {
+  background-color: #e2e1e0;
+  font-family: 'Hind Madurai', sans-serif;
+  line-height: 1.5;
+
+  height: 100%;
 }
 
-body,
-html {
-  background-color: #e2e1e0;
-  font-family: Helvetica, sans-serif;
-  line-height: 1.5;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Montserrat', sans-serif;
 }

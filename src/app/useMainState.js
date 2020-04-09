@@ -6,16 +6,21 @@ const initialState = {
   chat: null,
   selectedContact: null,
   error: null,
-  loading: true
+  loading: false,
 }
 
 const reducer = (state, action) => {
   switch (action.type) {
+    case 'startLoading': {
+      return { ...state, loading: true }
+    }
+
     case 'setChat': {
       return {
         ...state,
         chat: action.payload,
-        loading: false
+        loading: false,
+        error: null,
       }
     }
 
@@ -23,14 +28,14 @@ const reducer = (state, action) => {
       return {
         ...state,
         loading: false,
-        error: action.payload
+        error: action.payload,
       }
     }
 
     case 'selectContact': {
       return {
         ...state,
-        selectedContact: action.payload
+        selectedContact: action.payload,
       }
     }
 
@@ -40,13 +45,15 @@ const reducer = (state, action) => {
   }
 }
 
-const useMainState = selectedFile => {
+const useMainState = (selectedFile) => {
   const [state, dispatch] = useReducer(reducer, initialState)
 
   useEffect(() => {
-    ;(async function() {
+    ;(async function () {
       try {
         if (!selectedFile) return
+
+        dispatch({ type: 'startLoading' })
 
         const data = await readBrowserFileContent(selectedFile)
         const chat = parseWhatsappChat(data)
@@ -58,7 +65,7 @@ const useMainState = selectedFile => {
     })()
   }, [selectedFile])
 
-  const setSelectedContact = useCallback(contact => {
+  const setSelectedContact = useCallback((contact) => {
     dispatch({ type: 'selectContact', payload: contact })
   }, [])
 

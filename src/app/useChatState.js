@@ -18,7 +18,7 @@ const initState = ({ chat, messagesPerPage }) => {
     messageRefs: filteredMessages.reduce(referenceCreator, {}),
     hasMoreMessages: allMessages.length !== filteredMessages.length,
     isGroupChat: chat.contacts.length > 2,
-    page: 1
+    page: 1,
   }
 }
 
@@ -41,7 +41,7 @@ const reducer = (state, action) => {
         page: nextPage,
         messages: R.concat(nextMessages, state.messages),
         messageRefs: R.mergeAll([nextMessagesRefs, state.messageRefs]),
-        hasMoreMessages: state.allMessages.length !== nextMessages.length
+        hasMoreMessages: state.allMessages.length !== nextMessages.length,
       }
     }
 
@@ -68,18 +68,18 @@ const useChatState = ({ chat, messagesPerPage }) => {
     state.allMessages.length,
     state.messageRefs,
     state.messagesPerPage,
-    state.page
+    state.page,
   ])
 
-  const loadPrevious = useCallback(isVisible => {
+  const loadPrevious = useCallback((isVisible) => {
     if (isVisible) {
-      setTimeout(() => dispatch({ type: 'loadPrevious' }), 500)
+      setTimeout(() => dispatch({ type: 'loadPrevious' }), 750)
     }
   }, [])
 
   return {
     loadPrevious,
-    ...state
+    ...state,
   }
 }
 

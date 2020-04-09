@@ -1,16 +1,8 @@
 import React from 'react'
-import DropFile from './DropFile'
-import SimpleFileInput from './SimpleFileInput'
 
-// Read more: https://css-tricks.com/drag-and-drop-file-uploading/
-const isAdvancedUpload = (function() {
-  var div = document.createElement('div')
-  return 'draggable' in div || ('ondragstart' in div && 'ondrop' in div)
-})()
-
-const WelcomeView = ({ onSelectFile }) => {
+const AboutApp = () => {
   return (
-    <div className="card welcome">
+    <div className="aboutApp">
       <h1 className="welcome-title">WhatsApp Chat Viewer</h1>
       <div className="paragraph-1">
         <p>
@@ -20,12 +12,6 @@ const WelcomeView = ({ onSelectFile }) => {
           to read exported chats.
         </p>
       </div>
-
-      {isAdvancedUpload ? (
-        <DropFile onSelectFile={onSelectFile} />
-      ) : (
-        <SimpleFileInput onSelectFile={onSelectFile} />
-      )}
 
       <div className="paragraph-2">
         <p>
@@ -63,4 +49,4 @@ const WelcomeView = ({ onSelectFile }) => {
   )
 }
 
-export default WelcomeView
+export default AboutApp

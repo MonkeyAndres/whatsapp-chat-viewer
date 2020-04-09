@@ -1,27 +1,53 @@
 import React, { useState, useCallback } from 'react'
 import Layout from '../ui/shared/Layout'
-import WelcomeView from '../ui/welcome/WelcomeView'
-import Main from './Main'
-import TransitionWrapper from './common/TransitionWrapper'
+import AboutApp from '../ui/views/AboutApp'
+import SelectFileView from '../ui/views/SelectFileView'
+import useMainState from './useMainState'
+import { isNilOrEmpty } from './utils'
+import SpinnerView from '../ui/views/SpinnerView'
+import ErrorView from '../ui/views/ErrorView'
+import ContactSelector from '../ui/chat/ContactSelector'
+import Chat from './Chat'
 
 const App = () => {
   const [selectedFile, setSelectedFile] = useState()
 
-  const onSelectFile = useCallback(file => {
-    setSelectedFile(file)
-  }, [])
+  const {
+    chat,
+    loading,
+    error,
+    selectedContact,
+    setSelectedContact,
+  } = useMainState(selectedFile)
+
+  const hasFile = !isNilOrEmpty(selectedFile)
+  const hasSelectedContact = !isNilOrEmpty(selectedContact)
 
   const goBack = useCallback(() => setSelectedFile(null), [])
 
   return (
     <Layout>
-      <TransitionWrapper appear={!selectedFile} animationType="from-left">
-        <WelcomeView onSelectFile={onSelectFile} />
-      </TransitionWrapper>
+      <AboutApp />
 
-      <TransitionWrapper appear={!!selectedFile} animationType="from-right">
-        <Main goBack={goBack} selectedFile={selectedFile} />
-      </TransitionWrapper>
+      <div className="chatContainer">
+        {!hasFile ? (
+          <SelectFileView onSelectFile={setSelectedFile} />
+        ) : loading ? (
+          <SpinnerView />
+        ) : !isNilOrEmpty(error) ? (
+          <ErrorView error={error} onClickTryAgain={goBack} />
+        ) : !hasSelectedContact ? (
+          <ContactSelector
+            contacts={chat?.contacts || []}
+            onSelectContact={setSelectedContact}
+            goBack={goBack}
+          />
+        ) : (
+          <Chat chat={chat} selectedContact={selectedContact} goBack={goBack} />
+        )}
+      </div>
+
+      {/* <Main goBack={goBack} selectedFile={selectedFile} /> */}
     </Layout>
   )
 }

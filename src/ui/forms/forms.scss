@@ -1,0 +1,34 @@
+.selectFile {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  box-sizing: border-box;
+
+  background-color: $dark_sky_blue;
+
+  transition: all 200ms ease-in-out;
+
+  &--advance {
+    border: 30px solid rgba($color: #000000, $alpha: 0.2);
+
+    &.is-dragover {
+      border: 10px solid rgba($color: #000000, $alpha: 0.2);
+      background-color: darken($color: $dark_sky_blue, $amount: 20%);
+    }
+  }
+
+  &-icon {
+    width: 150px;
+    height: 150px;
+  }
+
+  &-label {
+    margin-top: 1.5rem;
+    font-size: 28px;
+  }
+}

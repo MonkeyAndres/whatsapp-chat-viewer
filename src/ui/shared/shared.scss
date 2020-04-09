@@ -1,0 +1,30 @@
+.layoutGrid {
+  width: 100%;
+  max-width: $container-max-width;
+
+  height: 100%;
+
+  margin: 0 auto;
+
+  display: grid;
+  grid-template-columns: 2rem 3fr 5fr 2rem;
+  grid-template-rows: minmax(2rem, auto) minmax(auto, 800px) minmax(2rem, auto);
+  grid-template-areas:
+    '. ........ ............. .'
+    '. aboutApp chatContainer .'
+    '. ........ ............. .';
+
+  .aboutApp {
+    grid-area: aboutApp;
+
+    height: 100%;
+    overflow: auto;
+  }
+
+  .chatContainer {
+    grid-area: chatContainer;
+
+    height: 100%;
+    overflow: auto;
+  }
+}

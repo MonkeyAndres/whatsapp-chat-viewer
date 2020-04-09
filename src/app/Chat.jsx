@@ -1,6 +1,6 @@
 import React from 'react'
-import ChatView from '../ui/main/ChatView'
-import ChatMessage from '../ui/main/ChatMessage'
+import ChatView from '../ui/chat/ChatView'
+import ChatMessage from '../ui/chat/ChatMessage'
 import VisibilitySensor from 'react-visibility-sensor'
 import { useCallback } from 'react'
 import useChatState from './useChatState'
@@ -12,14 +12,14 @@ const Chat = ({ chat, selectedContact, goBack }) => {
     loadPrevious,
     messages,
     messageRefs,
-    isGroupChat
+    isGroupChat,
   } = useChatState({
     chat: chat,
-    messagesPerPage: 100
+    messagesPerPage: 50,
   })
 
   const renderMessage = useCallback(
-    msg => {
+    (msg) => {
       const isMine = msg.sender === selectedContact
 
       return (
@@ -36,25 +36,23 @@ const Chat = ({ chat, selectedContact, goBack }) => {
   )
 
   return (
-    <div className="card chat">
-      <ChatView
-        header={chat?.header}
-        goBack={goBack}
-        chatSlot={
-          <>
-            {hasMoreMessages && (
-              <VisibilitySensor onChange={loadPrevious} delayedCall={true}>
-                <div className="loader">
-                  <Spinner />
-                </div>
-              </VisibilitySensor>
-            )}
+    <ChatView
+      header={chat?.header}
+      goBack={goBack}
+      chatSlot={
+        <>
+          {hasMoreMessages && (
+            <VisibilitySensor onChange={loadPrevious} delayedCall={true}>
+              <div className="loader">
+                <Spinner />
+              </div>
+            </VisibilitySensor>
+          )}
 
-            {messages.map(renderMessage)}
-          </>
-        }
-      />
-    </div>
+          {messages.map(renderMessage)}
+        </>
+      }
+    />
   )
 }
 

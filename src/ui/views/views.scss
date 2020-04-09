@@ -1,0 +1,47 @@
+.aboutApp {
+  background-color: #fff;
+  padding: 0 1.5rem;
+}
+
+.selectFileView {
+  height: 100%;
+}
+
+.spinnerView {
+  height: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: $dark_sky_blue;
+}
+
+.errorView {
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  background-color: $dark_sky_blue;
+
+  &-description {
+    margin: 0;
+    margin-bottom: 2rem;
+  }
+
+  &-button {
+    background-color: rgba($color: #000000, $alpha: 0.2);
+    border: 0;
+    padding: 0.7rem 1.5rem;
+    border-radius: 3px;
+    outline: none;
+    cursor: pointer;
+
+    &:hover {
+      background-color: rgba($color: #000000, $alpha: 0.3);
+    }
+  }
+}

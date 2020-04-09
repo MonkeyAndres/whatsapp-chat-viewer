@@ -5,10 +5,12 @@ const SimpleFileInput = ({ onSelectFile }) => {
   const fileInputRef = useRef()
 
   return (
-    <div className="drop-file" onClick={() => fileInputRef.current.click()}>
-      <UploadIcon />
+    <div className="selectFile" onClick={() => fileInputRef.current.click()}>
+      <UploadIcon className="selectFile-icon" />
 
-      <label htmlFor="chat">Choose a file or drag it here!</label>
+      <label className="selectFile-label" htmlFor="chat">
+        Choose a file!
+      </label>
 
       <input
         type="file"
@@ -16,7 +18,7 @@ const SimpleFileInput = ({ onSelectFile }) => {
         id="chat"
         hidden
         ref={fileInputRef}
-        onChange={event => onSelectFile(event.target.files[0])}
+        onChange={(event) => onSelectFile(event.target.files[0])}
       />
     </div>
   )

@@ -1,8 +1,12 @@
+// Base
+
+@import './normalize.css';
 @import './variables.scss';
-
-@import './animations.scss';
 @import './base.scss';
-@import './layout.scss';
 
-@import './welcome/index.scss';
-@import './main/index.scss';
+// Components
+
+@import '../ui/shared/shared.scss';
+@import '../ui/views/views.scss';
+@import '../ui/forms/forms.scss';
+@import '../ui/chat/chat.scss';
