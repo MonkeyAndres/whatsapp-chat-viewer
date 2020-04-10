@@ -53,7 +53,7 @@
 }
 
 .chatView {
-  background-color: #eee;
+  background-color: $chat_background;
 
   &-header {
     position: sticky;
@@ -146,12 +146,12 @@
         grid-column: 2 / 5;
         justify-self: flex-start;
 
-        background-color: #75dddd;
+        background-color: $middle_blue;
         border-radius: 0px 5px 5px 5px;
 
         &::after {
           border-width: 0px 10px 10px 0;
-          border-color: transparent #75dddd transparent transparent;
+          border-color: transparent $middle_blue transparent transparent;
           top: 0;
           left: -10px;
         }
