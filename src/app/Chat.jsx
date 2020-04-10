@@ -15,7 +15,7 @@ const Chat = ({ chat, selectedContact, goBack }) => {
     isGroupChat,
   } = useChatState({
     chat: chat,
-    messagesPerPage: 50,
+    messagesPerPage: 100,
   })
 
   const renderMessage = useCallback(
