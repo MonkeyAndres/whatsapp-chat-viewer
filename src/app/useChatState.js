@@ -25,23 +25,28 @@ const initState = ({ chat, messagesPerPage }) => {
 const reducer = (state, action) => {
   switch (action.type) {
     case 'loadPrevious': {
+      if (!state.hasMoreMessages) {
+        return state
+      }
+
       const nextPage = state.page + 1
 
       const allMessagesLength = state.allMessages.length
-      const nextMessages = R.slice(
-        allMessagesLength - nextPage * state.messagesPerPage,
-        allMessagesLength - state.page * state.messagesPerPage,
-        state.allMessages
+      const nextMessages = state.allMessages.slice(
+        Math.max(0, allMessagesLength - nextPage * state.messagesPerPage),
+        allMessagesLength - state.page * state.messagesPerPage
       )
 
       const nextMessagesRefs = nextMessages.reduce(referenceCreator, {})
 
+      const messages = R.concat(nextMessages, state.messages)
+
       return {
         ...state,
         page: nextPage,
-        messages: R.concat(nextMessages, state.messages),
+        messages,
         messageRefs: R.mergeAll([nextMessagesRefs, state.messageRefs]),
-        hasMoreMessages: state.allMessages.length !== nextMessages.length,
+        hasMoreMessages: state.allMessages.length !== messages.length,
       }
     }
 
@@ -59,8 +64,10 @@ const useChatState = ({ chat, messagesPerPage }) => {
 
   useLayoutEffect(() => {
     const allMessageCount = state.allMessages.length
-    const latestMessageIndex =
+    const latestMessageIndex = Math.max(
+      1,
       allMessageCount - (state.page - 1) * state.messagesPerPage
+    )
     const lastMessage = state.messageRefs[latestMessageIndex]
 
     lastMessage.current.scrollIntoView(true)
@@ -73,7 +80,7 @@ const useChatState = ({ chat, messagesPerPage }) => {
 
   const loadPrevious = useCallback((isVisible) => {
     if (isVisible) {
-      setTimeout(() => dispatch({ type: 'loadPrevious' }), 750)
+      setTimeout(() => dispatch({ type: 'loadPrevious' }), 400)
     }
   }, [])
 
