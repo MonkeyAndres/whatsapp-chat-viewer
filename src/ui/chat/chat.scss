@@ -12,6 +12,10 @@
 
     padding: 1rem;
 
+    .back-arrow {
+      cursor: pointer;
+    }
+
     .text {
       font-size: 30px;
       margin: 0;
@@ -38,7 +42,7 @@
     align-self: flex-start;
 
     background-color: rgba($color: #000000, $alpha: 0.2);
-    padding: 0.7rem 0;
+    padding: 1rem 0;
 
     border: 0;
     border-radius: 3px;
@@ -61,6 +65,7 @@
     left: 0;
     z-index: 100;
     width: 100%;
+    box-sizing: border-box;
 
     background-color: $dark_sky_blue;
 
@@ -79,8 +84,9 @@
       display: block;
       width: 100%;
 
-      font-size: 35px;
+      font-size: 30px;
       font-weight: normal;
+
       margin: 0;
       margin-left: 15px;
 
@@ -169,6 +175,50 @@
           border-color: transparent transparent transparent white;
           top: 0;
           right: -10px;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .contactSelector {
+    &-header {
+      .back-arrow {
+        width: 25px;
+      }
+
+      .text {
+        font-size: 25px;
+      }
+    }
+
+    &-contactList {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .chatView {
+    &-header {
+      .back-arrow {
+        width: 25px;
+      }
+
+      .header-text {
+        font-size: 25px;
+      }
+    }
+
+    &-container {
+      grid-template-columns: 20px 1fr 1fr 1fr 1fr 1fr 20px;
+
+      .message {
+        &.others {
+          grid-column: 2 / 6;
+        }
+
+        &.mine {
+          grid-column: 3 / 7;
         }
       }
     }

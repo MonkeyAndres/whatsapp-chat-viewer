@@ -8,6 +8,7 @@ import SpinnerView from '../ui/views/SpinnerView'
 import ErrorView from '../ui/views/ErrorView'
 import ContactSelector from '../ui/chat/ContactSelector'
 import Chat from './Chat'
+import useWindowDimensions from './useWindowDimensions'
 
 const App = () => {
   const [selectedFile, setSelectedFile] = useState()
@@ -23,11 +24,18 @@ const App = () => {
   const hasFile = !isNilOrEmpty(selectedFile)
   const hasSelectedContact = !isNilOrEmpty(selectedContact)
 
-  const goBack = useCallback(() => setSelectedFile(null), [])
+  const goBack = useCallback(() => {
+    setSelectedFile(null)
+    setSelectedContact(null)
+  }, [setSelectedContact])
+
+  const { width } = useWindowDimensions()
+
+  const isReducedView = width <= 768
 
   return (
     <Layout>
-      <AboutApp />
+      {(!hasFile || !isReducedView) && <AboutApp />}
 
       <div className="chatContainer">
         {!hasFile ? (
