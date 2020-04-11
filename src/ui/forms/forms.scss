@@ -13,6 +13,8 @@
 
   transition: all 200ms ease-in-out;
 
+  padding: 2rem;
+
   &--advance {
     border: 30px solid rgba($color: #000000, $alpha: 0.2);
 
@@ -23,12 +25,20 @@
   }
 
   &-icon {
-    width: 150px;
-    height: 150px;
+    width: 100px;
+    height: 100px;
   }
 
   &-label {
     margin-top: 1.5rem;
-    font-size: 28px;
+    font-size: 25px;
+  }
+}
+
+@media screen and (max-width: 470px) {
+  .selectFile {
+    &-icon {
+      display: none;
+    }
   }
 }

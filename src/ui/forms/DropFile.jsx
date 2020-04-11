@@ -18,9 +18,9 @@ const DropFile = ({ onSelectFile }) => {
     >
       <UploadIcon className="selectFile-icon" />
 
-      <label className="selectFile-label" htmlFor="chat">
+      <h2 className="selectFile-label" htmlFor="chat">
         Choose a file or drag it here!
-      </label>
+      </h2>
 
       <input
         type="file"

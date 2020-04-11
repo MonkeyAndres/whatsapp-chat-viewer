@@ -8,9 +8,9 @@ const SimpleFileInput = ({ onSelectFile }) => {
     <div className="selectFile" onClick={() => fileInputRef.current.click()}>
       <UploadIcon className="selectFile-icon" />
 
-      <label className="selectFile-label" htmlFor="chat">
+      <h2 className="selectFile-label" htmlFor="chat">
         Choose a file!
-      </label>
+      </h2>
 
       <input
         type="file"
