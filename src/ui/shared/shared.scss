@@ -29,15 +29,7 @@
   }
 }
 
-@media screen and (max-width: 900px) {
-  .layoutGrid {
-    grid-template-columns: 4fr 5fr;
-    grid-template-rows: 1fr;
-    grid-template-areas: 'aboutApp chatContainer';
-  }
-}
-
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1033px) {
   .layoutGrid {
     grid-template-columns: 1fr;
     grid-template-rows: auto minmax(250px, 1fr);
