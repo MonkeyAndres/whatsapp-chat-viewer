@@ -1,6 +1,15 @@
 .aboutApp {
   background-color: #fff;
   padding: 0 1.5rem;
+
+  &-subheader {
+    margin: 0;
+    margin-top: 2rem;
+  }
+
+  p {
+    margin: 0.5rem 0;
+  }
 }
 
 .selectFileView {
