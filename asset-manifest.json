@@ -1,25 +1,26 @@
 {
   "files": {
-    "main.css": "/whatsapp-chat-viewer/static/css/main.a76a70fb.chunk.css",
-    "main.js": "/whatsapp-chat-viewer/static/js/main.888ba86d.chunk.js",
-    "main.js.map": "/whatsapp-chat-viewer/static/js/main.888ba86d.chunk.js.map",
-    "runtime-main.js": "/whatsapp-chat-viewer/static/js/runtime-main.fa9495f7.js",
-    "runtime-main.js.map": "/whatsapp-chat-viewer/static/js/runtime-main.fa9495f7.js.map",
-    "static/js/2.9d87e11f.chunk.js": "/whatsapp-chat-viewer/static/js/2.9d87e11f.chunk.js",
-    "static/js/2.9d87e11f.chunk.js.map": "/whatsapp-chat-viewer/static/js/2.9d87e11f.chunk.js.map",
+    "main.css": "/whatsapp-chat-viewer/static/css/main.d5c18942.chunk.css",
+    "main.js": "/whatsapp-chat-viewer/static/js/main.07a3222a.chunk.js",
+    "main.js.map": "/whatsapp-chat-viewer/static/js/main.07a3222a.chunk.js.map",
+    "runtime-main.js": "/whatsapp-chat-viewer/static/js/runtime-main.18cd45fa.js",
+    "runtime-main.js.map": "/whatsapp-chat-viewer/static/js/runtime-main.18cd45fa.js.map",
+    "static/js/2.7ad8ed02.chunk.js": "/whatsapp-chat-viewer/static/js/2.7ad8ed02.chunk.js",
+    "static/js/2.7ad8ed02.chunk.js.map": "/whatsapp-chat-viewer/static/js/2.7ad8ed02.chunk.js.map",
     "index.html": "/whatsapp-chat-viewer/index.html",
-    "precache-manifest.06613639023ab116a1ad9e9cff066c43.js": "/whatsapp-chat-viewer/precache-manifest.06613639023ab116a1ad9e9cff066c43.js",
+    "precache-manifest.9309b0e39cd938675d54475d44d33c54.js": "/whatsapp-chat-viewer/precache-manifest.9309b0e39cd938675d54475d44d33c54.js",
     "service-worker.js": "/whatsapp-chat-viewer/service-worker.js",
-    "static/css/main.a76a70fb.chunk.css.map": "/whatsapp-chat-viewer/static/css/main.a76a70fb.chunk.css.map",
-    "static/js/2.9d87e11f.chunk.js.LICENSE.txt": "/whatsapp-chat-viewer/static/js/2.9d87e11f.chunk.js.LICENSE.txt",
+    "static/css/main.d5c18942.chunk.css.map": "/whatsapp-chat-viewer/static/css/main.d5c18942.chunk.css.map",
+    "static/js/2.7ad8ed02.chunk.js.LICENSE.txt": "/whatsapp-chat-viewer/static/js/2.7ad8ed02.chunk.js.LICENSE.txt",
+    "static/js/main.07a3222a.chunk.js.LICENSE.txt": "/whatsapp-chat-viewer/static/js/main.07a3222a.chunk.js.LICENSE.txt",
     "static/media/arrow-left.3b5d5b59.svg": "/whatsapp-chat-viewer/static/media/arrow-left.3b5d5b59.svg",
     "static/media/three-dots.7627bc82.svg": "/whatsapp-chat-viewer/static/media/three-dots.7627bc82.svg",
     "static/media/upload.749f1ba7.svg": "/whatsapp-chat-viewer/static/media/upload.749f1ba7.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.fa9495f7.js",
-    "static/js/2.9d87e11f.chunk.js",
-    "static/css/main.a76a70fb.chunk.css",
-    "static/js/main.888ba86d.chunk.js"
+    "static/js/runtime-main.18cd45fa.js",
+    "static/js/2.7ad8ed02.chunk.js",
+    "static/css/main.d5c18942.chunk.css",
+    "static/js/main.07a3222a.chunk.js"
   ]
 }
