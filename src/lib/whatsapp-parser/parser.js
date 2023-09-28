@@ -2,7 +2,7 @@ import * as R from 'ramda'
 import {
   DATE_SEPARATOR,
   TIME_SEPARATOR,
-  SECURITY_MESSAGE_REGEXP,
+  // SECURITY_MESSAGE_REGEXP,
   WHATSAPP_MESSAGE_REGEXP
 } from './constants'
 
@@ -15,12 +15,12 @@ const getDateByStrings = (dateString, timeString) => {
   return date
 }
 
-const checkIsValidInput = R.pipe(
-  R.split('\n'),
-  R.nth(0),
-  R.match(SECURITY_MESSAGE_REGEXP),
-  R.complement(R.isEmpty)
-)
+// const checkIsValidInput = R.pipe(
+//   R.split('\n'),
+//   R.nth(0),
+//   R.match(SECURITY_MESSAGE_REGEXP),
+//   R.complement(R.isEmpty)
+// )
 
 export const parseMessages = input => {
   /** HOTFIX! Comment security message check.
