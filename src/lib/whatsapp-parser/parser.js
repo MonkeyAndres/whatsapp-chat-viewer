@@ -23,11 +23,13 @@ const checkIsValidInput = R.pipe(
 )
 
 export const parseMessages = input => {
+  /** HOTFIX! Comment security message check.
   const isValidChat = checkIsValidInput(input)
 
   if (!isValidChat) {
     throw new Error('We cannot read whatsapp chat')
   }
+  */
 
   const messages = input.match(new RegExp(WHATSAPP_MESSAGE_REGEXP, 'g'))
 
