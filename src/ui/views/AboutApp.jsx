@@ -3,7 +3,7 @@ import React from 'react'
 const AboutApp = () => {
   return (
     <div className="aboutApp">
-      <h1 className="welcome-title">WhatsApp Chat Viewer</h1>
+      <h1 className="welcome-title">WhatsApp<br/>Chat viewer</h1>
 
       <p>
         WhatsApp chat viewer is an online tool that allows you to view your
