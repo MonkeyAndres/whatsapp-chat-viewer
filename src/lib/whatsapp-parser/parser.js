@@ -1,4 +1,3 @@
-import * as R from 'ramda'
 import {
   DATE_SEPARATOR,
   TIME_SEPARATOR,
@@ -33,6 +32,10 @@ export const parseMessages = input => {
 
   const messages = input.match(new RegExp(WHATSAPP_MESSAGE_REGEXP, 'g'))
 
+  if(!messages) {
+    throw new Error('We cannot read WhatsApp chat')
+  }
+
   const parsedMessages = messages.map((msg, index) => {
     const [, date, hour, sender, message] = msg.match(WHATSAPP_MESSAGE_REGEXP)
     return { id: index, date: getDateByStrings(date, hour), sender, message }
@@ -41,8 +44,14 @@ export const parseMessages = input => {
   return parsedMessages
 }
 
-export const parseContacts = R.pipe(
-  R.map(R.prop('sender')),
-  R.filter(R.pipe(R.isEmpty, R.not)),
-  R.uniq
-)
+export const parseContacts = (messages) => {
+  const uniqContacts = new Set()
+
+  messages.forEach((msg) => {
+    if(uniqContacts.has(msg.sender)) return
+
+    uniqContacts.add(msg.sender)
+  })
+
+  return Array.from(uniqContacts)
+}
