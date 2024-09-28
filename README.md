@@ -1,4 +1,4 @@
-# [WhatsApp Chat Viewer](https://monkeyandres.com/whatsapp-chat-viewer/)
+# [WhatsApp Chat Viewer](https://monkeyandres.github.io/whatsapp-chat-viewer/)
 
 Small React App for viewing exported WhatsApp chats.
 
