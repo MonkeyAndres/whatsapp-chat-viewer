@@ -1,0 +1,43 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - master
+      - "worker/**"
+
+jobs:
+  test-and-build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Verify repository checkout
+        run: test -f package.json
+
+      - name: Setup Node
+        run: |
+          curl -fsSLO https://nodejs.org/dist/v16.20.2/node-v16.20.2-linux-x64.tar.xz
+          tar -xf node-v16.20.2-linux-x64.tar.xz
+          echo "$PWD/node-v16.20.2-linux-x64/bin" >> "$GITHUB_PATH"
+          "$PWD/node-v16.20.2-linux-x64/bin/node" --version
+          "$PWD/node-v16.20.2-linux-x64/bin/npm" install --global yarn@1.22.22
+
+      - name: Verify toolchain
+        run: |
+          node --version
+          node --version | grep '^v16\.20\.2$'
+          yarn --version
+          yarn --version | grep '^1\.22\.22$'
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile --non-interactive
+
+      - name: Run tests
+        run: CI=true yarn test --watchAll=false
+
+      - name: Build production bundle
+        run: yarn build

@@ -63,19 +63,13 @@ const useChatState = ({ chat, messagesPerPage }) => {
   )
 
   useLayoutEffect(() => {
-    const allMessageCount = state.allMessages.length
-    const latestMessageIndex = Math.max(
-      1,
-      allMessageCount - (state.page - 1) * state.messagesPerPage
-    )
-    const lastMessage = state.messageRefs[latestMessageIndex]
+    const lastRenderedMessage = state.messages[state.messages.length - 1]
+    const lastMessage = state.messageRefs[lastRenderedMessage.id]
 
     lastMessage.current.scrollIntoView(true)
   }, [
-    state.allMessages.length,
     state.messageRefs,
-    state.messagesPerPage,
-    state.page,
+    state.messages,
   ])
 
   const loadPrevious = useCallback((isVisible) => {
