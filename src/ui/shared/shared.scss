@@ -55,6 +55,11 @@
   }
 }
 
+.languageSwitcher-option:focus {
+  outline: 3px solid #111;
+  outline-offset: 3px;
+}
+
 @media screen and (max-width: 1033px) {
   .layoutGrid {
     grid-template-columns: 1fr;

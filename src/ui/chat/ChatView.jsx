@@ -15,12 +15,14 @@ const ChatView = ({
   return (
     <div className="chatView">
       <div className="chatView-header">
-        <BackArrow
+        <button
           aria-label={t('chat.back')}
           className="back-arrow"
           onClick={goBack}
-          role="button"
-        />
+          type="button"
+        >
+          <BackArrow aria-hidden="true" focusable="false" />
+        </button>
         <h3 className="header-text" title={header}>{header}</h3>
         <div className="readModeSwitch" aria-label={t('chat.readMode')}>
           <button

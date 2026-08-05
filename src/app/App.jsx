@@ -30,6 +30,10 @@ const App = () => {
     setSelectedContact(null)
   }, [setSelectedContact])
 
+  const goBackToContacts = useCallback(() => {
+    setSelectedContact(null)
+  }, [setSelectedContact])
+
   const { width } = useWindowDimensions()
 
   const isReducedView = width <= 768
@@ -53,7 +57,7 @@ const App = () => {
               goBack={goBack}
             />
           ) : (
-            <Chat chat={chat} selectedContact={selectedContact} goBack={goBack} />
+            <Chat chat={chat} selectedContact={selectedContact} goBack={goBackToContacts} />
           )}
         </div>
 

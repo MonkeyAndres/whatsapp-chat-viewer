@@ -15,9 +15,10 @@
     "react-virtuoso": "3.1.5"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "NODE_OPTIONS=--openssl-legacy-provider react-scripts start",
+    "build": "NODE_OPTIONS=--openssl-legacy-provider react-scripts build",
     "test": "react-scripts test",
+    "test:e2e": "playwright test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
@@ -38,6 +39,7 @@
     ]
   },
   "devDependencies": {
+    "@playwright/test": "^1.62.1",
     "gh-pages": "^2.2.0",
     "sass": "^1.68.0"
   }

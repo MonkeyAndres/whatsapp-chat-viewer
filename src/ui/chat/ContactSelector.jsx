@@ -8,12 +8,14 @@ const ContactSelector = ({ contacts, onSelectContact, goBack }) => {
   return (
     <div className="contactSelector">
       <div className="contactSelector-header">
-        <BackArrow
+        <button
           aria-label={t('contact.back')}
           className="back-arrow"
           onClick={goBack}
-          role="button"
-        />
+          type="button"
+        >
+          <BackArrow aria-hidden="true" focusable="false" />
+        </button>
         <h3 className="text">{t('contact.title')}</h3>
       </div>
 
