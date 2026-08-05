@@ -92,8 +92,8 @@ describe('ErrorView', () => {
     expect(
       getByText('Esto no parece un chat de WhatsApp compatible.')
     ).toBeInTheDocument()
-    expect(getByLabelText('Diagnostico privado')).toHaveTextContent(
-      'No se encontraron lineas de mensajes de WhatsApp compatibles.'
+    expect(getByLabelText('Diagnóstico privado')).toHaveTextContent(
+      'No se encontraron líneas de mensajes de WhatsApp compatibles.'
     )
     expect(getByText('Elige otro archivo')).toBeInTheDocument()
   })

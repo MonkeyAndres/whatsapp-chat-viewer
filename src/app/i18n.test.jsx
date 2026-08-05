@@ -16,6 +16,10 @@ const LanguageProbe = () => {
     <div>
       <p>{language}</p>
       <p>{t('file.choose')}</p>
+      <p>{t('file.chooseOrDrop')}</p>
+      <p>{t('about.requirement')}</p>
+      <p>{t('about.projectMiddle')}</p>
+      <p>{t('error.privateDiagnostic')}</p>
       <button onClick={() => setLanguage('en')} type="button">EN</button>
       <button onClick={() => setLanguage('es')} type="button">ES</button>
     </div>
@@ -62,6 +66,24 @@ describe('i18n', () => {
     expect(getByText('Choose a file')).toBeInTheDocument()
     expect(window.localStorage.getItem(LANGUAGE_STORAGE_KEY)).toBe('en')
     expect(document.documentElement.lang).toBe('en')
+  })
+
+  test('renders representative Spanish copy with Unicode and keeps lang es', () => {
+    window.localStorage.setItem(LANGUAGE_STORAGE_KEY, 'es')
+
+    const { getByText } = render(
+      <I18nProvider>
+        <LanguageProbe />
+      </I18nProvider>
+    )
+
+    expect(getByText('Elige un archivo o arrástralo aquí')).toBeInTheDocument()
+    expect(
+      getByText('Para usar esta herramienta necesitas un chat de WhatsApp exportado en formato .txt. Abajo puedes ver cómo exportarlo.')
+    ).toBeInTheDocument()
+    expect(getByText(/código abierto/)).toBeInTheDocument()
+    expect(getByText('Diagnóstico privado')).toBeInTheDocument()
+    expect(document.documentElement.lang).toBe('es')
   })
 
   test('renders an accessible visible ES and EN language switcher', () => {
