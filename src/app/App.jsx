@@ -9,6 +9,7 @@ import ErrorView from '../ui/views/ErrorView'
 import ContactSelector from '../ui/chat/ContactSelector'
 import Chat from './Chat'
 import useWindowDimensions from './useWindowDimensions'
+import { I18nProvider } from './i18n'
 
 const App = () => {
   const [selectedFile, setSelectedFile] = useState()
@@ -34,29 +35,31 @@ const App = () => {
   const isReducedView = width <= 768
 
   return (
-    <Layout>
-      {(!hasFile || !isReducedView) && <AboutApp />}
+    <I18nProvider>
+      <Layout>
+        {(!hasFile || !isReducedView) && <AboutApp />}
 
-      <div className="chatContainer">
-        {!hasFile ? (
-          <SelectFileView onSelectFile={setSelectedFile} />
-        ) : loading ? (
-          <SpinnerView />
-        ) : !isNilOrEmpty(error) ? (
-          <ErrorView error={error} onClickTryAgain={goBack} />
-        ) : !hasSelectedContact ? (
-          <ContactSelector
-            contacts={chat?.contacts || []}
-            onSelectContact={setSelectedContact}
-            goBack={goBack}
-          />
-        ) : (
-          <Chat chat={chat} selectedContact={selectedContact} goBack={goBack} />
-        )}
-      </div>
+        <div className="chatContainer">
+          {!hasFile ? (
+            <SelectFileView onSelectFile={setSelectedFile} />
+          ) : loading ? (
+            <SpinnerView />
+          ) : !isNilOrEmpty(error) ? (
+            <ErrorView error={error} onClickTryAgain={goBack} />
+          ) : !hasSelectedContact ? (
+            <ContactSelector
+              contacts={chat?.contacts || []}
+              onSelectContact={setSelectedContact}
+              goBack={goBack}
+            />
+          ) : (
+            <Chat chat={chat} selectedContact={selectedContact} goBack={goBack} />
+          )}
+        </div>
 
-      {/* <Main goBack={goBack} selectedFile={selectedFile} /> */}
-    </Layout>
+        {/* <Main goBack={goBack} selectedFile={selectedFile} /> */}
+      </Layout>
+    </I18nProvider>
   )
 }
 

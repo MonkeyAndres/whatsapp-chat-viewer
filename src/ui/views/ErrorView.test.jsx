@@ -5,8 +5,13 @@ import {
   createFormatDiagnostic,
   createReadDiagnostic,
 } from '../../app/fileDiagnostics'
+import { I18nProvider, LANGUAGE_STORAGE_KEY } from '../../app/i18n'
 
 describe('ErrorView', () => {
+  beforeEach(() => {
+    window.localStorage.clear()
+  })
+
   test('shows a private unsupported-format diagnostic and retry action', () => {
     const onClickTryAgain = jest.fn()
     const { getByText, getByLabelText, queryByText } = render(
@@ -62,6 +67,37 @@ describe('ErrorView', () => {
       getByText('The browser could not read the selected file.')
     ).toBeInTheDocument()
   })
+
+  test('shows critical unsupported-format text in Spanish', () => {
+    window.localStorage.setItem(LANGUAGE_STORAGE_KEY, 'es')
+
+    const { getByLabelText, getByText } = render(
+      <I18nProvider>
+        <ErrorView
+          error={{
+            diagnostic: createFormatDiagnostic({
+              file: {
+                name: 'chat.txt',
+                type: 'text/plain',
+                size: 120,
+              },
+              content: 'not a supported export',
+            }),
+          }}
+          onClickTryAgain={() => {}}
+        />
+      </I18nProvider>
+    )
+
+    expect(
+      getByText('Esto no parece un chat de WhatsApp compatible.')
+    ).toBeInTheDocument()
+    expect(getByLabelText('Diagnostico privado')).toHaveTextContent(
+      'No se encontraron lineas de mensajes de WhatsApp compatibles.'
+    )
+    expect(getByText('Elige otro archivo')).toBeInTheDocument()
+  })
+
 
   test('shows parser counts without exposing chat content', () => {
     const { getByLabelText, queryByText } = render(

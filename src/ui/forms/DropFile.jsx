@@ -2,10 +2,12 @@ import React, { useRef } from 'react'
 import useDragoverBehaviour from './useDragoverBehaviour'
 import useDroppedFile from './useDroppedFile'
 import { ReactComponent as UploadIcon } from '../../assets/icons/upload.svg'
+import { useI18n } from '../../app/i18n'
 
 const DropFile = ({ onSelectFile }) => {
   const dropFileRef = useRef()
   const fileInputRef = useRef()
+  const { t } = useI18n()
 
   useDroppedFile(dropFileRef, onSelectFile)
   useDragoverBehaviour(dropFileRef)
@@ -19,7 +21,7 @@ const DropFile = ({ onSelectFile }) => {
       <UploadIcon className="selectFile-icon" />
 
       <h2 className="selectFile-label" htmlFor="chat">
-        Choose a file or drag it here!
+        {t('file.chooseOrDrop')}
       </h2>
 
       <input
