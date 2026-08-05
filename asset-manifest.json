@@ -1,18 +1,18 @@
 {
   "files": {
     "main.css": "/whatsapp-chat-viewer/static/css/main.71f27558.chunk.css",
-    "main.js": "/whatsapp-chat-viewer/static/js/main.ed5abe59.chunk.js",
-    "main.js.map": "/whatsapp-chat-viewer/static/js/main.ed5abe59.chunk.js.map",
+    "main.js": "/whatsapp-chat-viewer/static/js/main.a71afb87.chunk.js",
+    "main.js.map": "/whatsapp-chat-viewer/static/js/main.a71afb87.chunk.js.map",
     "runtime-main.js": "/whatsapp-chat-viewer/static/js/runtime-main.18cd45fa.js",
     "runtime-main.js.map": "/whatsapp-chat-viewer/static/js/runtime-main.18cd45fa.js.map",
     "static/js/2.d7241221.chunk.js": "/whatsapp-chat-viewer/static/js/2.d7241221.chunk.js",
     "static/js/2.d7241221.chunk.js.map": "/whatsapp-chat-viewer/static/js/2.d7241221.chunk.js.map",
     "index.html": "/whatsapp-chat-viewer/index.html",
-    "precache-manifest.d1958182853b44209fd149e61d972a8f.js": "/whatsapp-chat-viewer/precache-manifest.d1958182853b44209fd149e61d972a8f.js",
+    "precache-manifest.d713b378c4f4785a9347b8668141be29.js": "/whatsapp-chat-viewer/precache-manifest.d713b378c4f4785a9347b8668141be29.js",
     "service-worker.js": "/whatsapp-chat-viewer/service-worker.js",
     "static/css/main.71f27558.chunk.css.map": "/whatsapp-chat-viewer/static/css/main.71f27558.chunk.css.map",
     "static/js/2.d7241221.chunk.js.LICENSE.txt": "/whatsapp-chat-viewer/static/js/2.d7241221.chunk.js.LICENSE.txt",
-    "static/js/main.ed5abe59.chunk.js.LICENSE.txt": "/whatsapp-chat-viewer/static/js/main.ed5abe59.chunk.js.LICENSE.txt",
+    "static/js/main.a71afb87.chunk.js.LICENSE.txt": "/whatsapp-chat-viewer/static/js/main.a71afb87.chunk.js.LICENSE.txt",
     "static/media/arrow-left.3b5d5b59.svg": "/whatsapp-chat-viewer/static/media/arrow-left.3b5d5b59.svg",
     "static/media/three-dots.7627bc82.svg": "/whatsapp-chat-viewer/static/media/three-dots.7627bc82.svg",
     "static/media/upload.749f1ba7.svg": "/whatsapp-chat-viewer/static/media/upload.749f1ba7.svg"
@@ -21,6 +21,6 @@
     "static/js/runtime-main.18cd45fa.js",
     "static/js/2.d7241221.chunk.js",
     "static/css/main.71f27558.chunk.css",
-    "static/js/main.ed5abe59.chunk.js"
+    "static/js/main.a71afb87.chunk.js"
   ]
 }
