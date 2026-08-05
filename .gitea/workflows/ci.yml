@@ -18,6 +18,15 @@ jobs:
       - name: Verify repository checkout
         run: test -f package.json
 
+      - name: Reject versioned worker evidence
+        run: |
+          tracked_worker_evidence="$(git ls-files .worker-evidence)"
+          if [ -n "$tracked_worker_evidence" ]; then
+            echo "::error::.worker-evidence/ must not be tracked in Git"
+            printf '%s\n' "$tracked_worker_evidence"
+            exit 1
+          fi
+
       - name: Setup Node
         run: |
           curl -fsSLO https://nodejs.org/dist/v16.20.2/node-v16.20.2-linux-x64.tar.xz
