@@ -29,16 +29,16 @@ jobs:
 
       - name: Setup Node
         run: |
-          curl -fsSLO https://nodejs.org/dist/v16.20.2/node-v16.20.2-linux-x64.tar.xz
-          tar -xf node-v16.20.2-linux-x64.tar.xz
-          echo "$PWD/node-v16.20.2-linux-x64/bin" >> "$GITHUB_PATH"
-          "$PWD/node-v16.20.2-linux-x64/bin/node" --version
-          "$PWD/node-v16.20.2-linux-x64/bin/npm" install --global yarn@1.22.22
+          curl -fsSLO https://nodejs.org/dist/v22.23.1/node-v22.23.1-linux-x64.tar.xz
+          tar -xf node-v22.23.1-linux-x64.tar.xz
+          echo "$PWD/node-v22.23.1-linux-x64/bin" >> "$GITHUB_PATH"
+          "$PWD/node-v22.23.1-linux-x64/bin/node" --version
+          "$PWD/node-v22.23.1-linux-x64/bin/npm" install --global yarn@1.22.22
 
       - name: Verify toolchain
         run: |
           node --version
-          node --version | grep '^v16\.20\.2$'
+          node --version | grep '^v22\.23\.1$'
           yarn --version
           yarn --version | grep '^1\.22\.22$'
 
@@ -50,3 +50,9 @@ jobs:
 
       - name: Build production bundle
         run: yarn build
+
+      - name: Install Playwright browsers
+        run: yarn playwright install chromium --with-deps
+
+      - name: Run large chat Playwright test
+        run: yarn test:e2e
