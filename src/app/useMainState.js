@@ -68,7 +68,13 @@ const useMainState = (selectedFile) => {
       } catch (error) {
         const diagnostic =
           typeof data === 'string'
-            ? createFormatDiagnostic({ file: selectedFile, content: data })
+            ? {
+                ...createFormatDiagnostic({ file: selectedFile, content: data }),
+                parser: error.diagnostic || null,
+                stableCause:
+                  error.diagnostic?.stableCause ||
+                  'No supported WhatsApp message lines were found.',
+              }
             : createReadDiagnostic({ file: selectedFile })
 
         dispatch({

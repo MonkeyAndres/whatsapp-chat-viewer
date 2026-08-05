@@ -43,6 +43,22 @@ const ErrorView = ({ error, onClickTryAgain }) => {
               <dt>Cause</dt>
               <dd>{diagnostic.stableCause}</dd>
             </div>
+            {diagnostic.parser && (
+              <>
+                <div>
+                  <dt>Candidate lines</dt>
+                  <dd>{diagnostic.parser.candidateCount}</dd>
+                </div>
+                <div>
+                  <dt>Recognized lines</dt>
+                  <dd>{diagnostic.parser.recognizedCount}</dd>
+                </div>
+                <div>
+                  <dt>Date order</dt>
+                  <dd>{diagnostic.parser.dateConvention || 'none'}</dd>
+                </div>
+              </>
+            )}
           </dl>
           <p>
             Recognized lines look like{' '}

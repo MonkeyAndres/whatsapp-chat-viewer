@@ -62,4 +62,42 @@ describe('ErrorView', () => {
       getByText('The browser could not read the selected file.')
     ).toBeInTheDocument()
   })
+
+  test('shows parser counts without exposing chat content', () => {
+    const { getByLabelText, queryByText } = render(
+      <ErrorView
+        error={{
+          diagnostic: {
+            ...createFormatDiagnostic({
+              file: {
+                name: 'private-chat.txt',
+                type: 'text/plain',
+                size: 120,
+              },
+              content: '5/16/16, 7:49 PM - Alice Example: synthetic secret',
+            }),
+            stableCause: 'Conflicting day/month evidence was found across the chat.',
+            parser: {
+              lineCount: 2,
+              candidateCount: 2,
+              recognizedCount: 2,
+              dateConvention: null,
+              conventionStatus: 'conflict',
+              stableCause: 'Conflicting day/month evidence was found across the chat.',
+            },
+          },
+        }}
+        onClickTryAgain={() => {}}
+      />
+    )
+
+    const diagnostic = getByLabelText('Private diagnostic')
+
+    expect(diagnostic).toHaveTextContent('Candidate lines')
+    expect(diagnostic).toHaveTextContent('Recognized lines')
+    expect(diagnostic).toHaveTextContent('Date order')
+    expect(diagnostic).toHaveTextContent('none')
+    expect(queryByText(/synthetic secret/)).not.toBeInTheDocument()
+    expect(queryByText(/Alice Example/)).not.toBeInTheDocument()
+  })
 })

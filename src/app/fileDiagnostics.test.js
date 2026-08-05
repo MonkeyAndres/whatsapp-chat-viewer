@@ -27,6 +27,7 @@ describe('file diagnostics', () => {
     expect(diagnostic.fileType).toBe('text/plain')
     expect(diagnostic.size).toBe('1.4 KB')
     expect(diagnostic.lineCount).toBe(3)
+    expect(diagnostic.parser).toBe(null)
     expect(diagnostic.stableCause).toBe(
       'No supported WhatsApp message lines were found.'
     )
