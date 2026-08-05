@@ -5,8 +5,13 @@ const ChatView = ({ header, goBack, chatSlot }) => {
   return (
     <div className="chatView">
       <div className="chatView-header">
-        <BackArrow className="back-arrow" onClick={goBack} />
-        <h3 className="header-text">{header}</h3>
+        <BackArrow
+          aria-label="Back"
+          className="back-arrow"
+          onClick={goBack}
+          role="button"
+        />
+        <h3 className="header-text" title={header}>{header}</h3>
       </div>
 
       <div className="chatView-container">{chatSlot}</div>

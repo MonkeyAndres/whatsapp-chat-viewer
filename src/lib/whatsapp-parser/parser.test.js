@@ -16,9 +16,16 @@ describe('WhatsApp parser', () => {
       ].join('\n')
     )
 
-    expect(chat.header).toBe('Messages and calls are end-to-end encrypted.')
+    expect(chat.header).toBe('WhatsApp Chat')
     expect(chat.contacts).toEqual(['Alice', 'Bob'])
     expect(chat.messages).toEqual([
+      {
+        id: 0,
+        date: new Date(Date.UTC(2024, 1, 1, 3, 4, 5)),
+        sender: null,
+        message: 'Messages and calls are end-to-end encrypted.',
+        type: 'system',
+      },
       {
         id: 1,
         date: new Date(Date.UTC(2024, 1, 1, 3, 5, 6)),
@@ -45,21 +52,30 @@ describe('WhatsApp parser', () => {
       ].join('\n')
     )
 
-    expect(chat.header).toBe('Messages and calls are end-to-end encrypted.')
+    expect(chat.header).toBe('WhatsApp Chat')
     expect(chat.contacts).toEqual(['Alice', 'Bob'])
-    expect(chat.messages.map(({ sender, message, date }) => ({
+    expect(chat.messages.map(({ sender, message, type, date }) => ({
       sender,
       message,
+      type,
       date: date.toISOString(),
     }))).toEqual([
       {
+        sender: null,
+        message: 'Messages and calls are end-to-end encrypted.',
+        type: 'system',
+        date: '2024-02-13T15:04:00.000Z',
+      },
+      {
         sender: 'Alice',
         message: 'Hi from Android',
+        type: 'chat',
         date: '2024-02-13T15:05:00.000Z',
       },
       {
         sender: 'Bob',
         message: 'Seconds still work',
+        type: 'chat',
         date: '2024-02-13T15:06:07.000Z',
       },
     ])
@@ -75,6 +91,13 @@ describe('WhatsApp parser', () => {
     )
 
     expect(chat.messages).toEqual([
+      {
+        id: 0,
+        date: new Date(Date.UTC(2016, 4, 16, 19, 48, 0)),
+        sender: null,
+        message: 'Messages and calls are end-to-end encrypted.',
+        type: 'system',
+      },
       {
         id: 1,
         date: new Date(Date.UTC(2016, 4, 16, 19, 49, 0)),
@@ -143,9 +166,14 @@ describe('WhatsApp parser', () => {
     )
 
     expect(chat.contacts).toEqual(['Alice', 'Bob'])
-    expect(chat.messages.map(({ sender, message }) => ({ sender, message }))).toEqual([
-      { sender: 'Alice', message: 'Hi from iOS' },
-      { sender: 'Bob', message: 'Unicode marks are ignored' },
+    expect(chat.messages.map(({ sender, message, type }) => ({ sender, message, type }))).toEqual([
+      {
+        sender: null,
+        message: 'Messages and calls are end-to-end encrypted.',
+        type: 'system',
+      },
+      { sender: 'Alice', message: 'Hi from iOS', type: 'chat' },
+      { sender: 'Bob', message: 'Unicode marks are ignored', type: 'chat' },
     ])
   })
 
@@ -161,6 +189,7 @@ describe('WhatsApp parser', () => {
     )
 
     expect(chat.messages.map((message) => message.message)).toEqual([
+      'Messages and calls are end-to-end encrypted.',
       'First line\nsecond line\n[not a new message]',
       'Next message',
     ])
@@ -178,6 +207,7 @@ describe('WhatsApp parser', () => {
 
     expect(chat.contacts).toEqual(['Alice', 'Bob'])
     expect(chat.messages.map((message) => message.type)).toEqual([
+      'system',
       'chat',
       'system',
       'chat',
@@ -197,6 +227,33 @@ describe('WhatsApp parser', () => {
       'First exported line',
       'Second exported line',
     ])
+  })
+
+  test('parses an 8000 line synthetic export without losing the system notice', () => {
+    const lines = ['5/16/16, 19:48 - Messages and calls are end-to-end encrypted.']
+
+    for (let index = 0; index < 8000; index += 1) {
+      const author = index % 2 === 0 ? 'Alice Example' : 'Bob Example'
+      lines.push(`5/16/16, 19:49 - ${author}: Synthetic message ${index}`)
+    }
+
+    const startedAt = Date.now()
+    const chat = parseWhatsappChat(lines.join('\n'))
+    const elapsedMs = Date.now() - startedAt
+
+    expect(chat.contacts).toEqual(['Alice Example', 'Bob Example'])
+    expect(chat.messages).toHaveLength(8001)
+    expect(chat.messages[0]).toMatchObject({
+      sender: null,
+      type: 'system',
+      message: 'Messages and calls are end-to-end encrypted.',
+    })
+    expect(chat.messages[8000]).toMatchObject({
+      sender: 'Bob Example',
+      type: 'chat',
+      message: 'Synthetic message 7999',
+    })
+    expect(elapsedMs).toBeLessThan(2000)
   })
 
   test('rejects unsupported files with a human safe message', () => {

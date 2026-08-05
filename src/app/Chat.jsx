@@ -6,6 +6,15 @@ import { useCallback } from 'react'
 import useChatState from './useChatState'
 import Spinner from '../ui/shared/Spinner'
 
+const getConversationHeader = ({ chat, selectedContact }) => {
+  if (chat?.contacts?.length === 2) {
+    const otherContact = chat.contacts.find(contact => contact !== selectedContact)
+    return otherContact || chat.header
+  }
+
+  return chat?.header
+}
+
 const Chat = ({ chat, selectedContact, goBack }) => {
   const {
     hasMoreMessages,
@@ -37,7 +46,7 @@ const Chat = ({ chat, selectedContact, goBack }) => {
 
   return (
     <ChatView
-      header={chat?.header}
+      header={getConversationHeader({ chat, selectedContact })}
       goBack={goBack}
       chatSlot={
         <>

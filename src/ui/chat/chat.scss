@@ -146,6 +146,7 @@
         font-family: inherit;
         white-space: pre-line;
         margin: 0;
+        overflow-wrap: anywhere;
       }
 
       &.others {
@@ -175,6 +176,30 @@
           border-color: transparent transparent transparent white;
           top: 0;
           right: -10px;
+        }
+      }
+
+      &.system {
+        grid-column: 3 / 6;
+        justify-self: center;
+
+        max-width: 100%;
+        box-sizing: border-box;
+
+        color: #39424e;
+        background-color: rgba($color: #ffffff, $alpha: 0.75);
+        border-radius: 5px;
+        text-align: center;
+
+        &::after {
+          display: none;
+        }
+
+        .date {
+          float: none;
+          display: block;
+          padding: 4px 0 0;
+          bottom: auto;
         }
       }
     }
@@ -219,6 +244,10 @@
 
         &.mine {
           grid-column: 3 / 7;
+        }
+
+        &.system {
+          grid-column: 2 / 7;
         }
       }
     }
