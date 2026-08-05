@@ -2,13 +2,11 @@ import { parseMessages, parseContacts } from './parser'
 
 const parseWhatsappChat = input => {
   const parsedMessages = parseMessages(input)
-  const hasHeader = parsedMessages[0]?.type === 'system'
-  const messages = hasHeader ? parsedMessages.slice(1) : parsedMessages
-  const contacts = parseContacts(messages)
+  const contacts = parseContacts(parsedMessages)
 
-  const header = hasHeader ? parsedMessages[0].message : 'WhatsApp Chat'
+  const header = 'WhatsApp Chat'
 
-  return { header, messages, contacts }
+  return { header, messages: parsedMessages, contacts }
 }
 
 export default parseWhatsappChat
