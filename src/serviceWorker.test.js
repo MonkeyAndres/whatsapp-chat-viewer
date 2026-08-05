@@ -55,10 +55,15 @@ describe('service worker cleanup', () => {
       },
     ])
     window.caches.keys.mockResolvedValue([
+      'whatsapp-chat-viewer-precache',
       'precache-v2-https://monkeyandres.github.io/whatsapp-chat-viewer/',
       'precache-v2-https://monkeyandres.com/whatsapp-chat-viewer/',
       'runtime-https://monkeyandres.com/whatsapp-chat-viewer/',
+      'precache-v2',
+      'runtime',
+      'whatsapp-chat-viewer-precache-v2',
       'precache-v2-https://monkeyandres.github.io/another-app/',
+      'runtime-https://monkeyandres.github.io/another-app/',
       'synthetic-cache-from-another-app',
     ])
     window.caches.delete.mockResolvedValue(true)
@@ -68,6 +73,9 @@ describe('service worker cleanup', () => {
     expect(unregisterViewer).toHaveBeenCalledTimes(1)
     expect(unregisterOtherApp).not.toHaveBeenCalled()
     expect(window.caches.delete).toHaveBeenCalledWith(
+      'whatsapp-chat-viewer-precache'
+    )
+    expect(window.caches.delete).toHaveBeenCalledWith(
       'precache-v2-https://monkeyandres.github.io/whatsapp-chat-viewer/'
     )
     expect(window.caches.delete).toHaveBeenCalledWith(
@@ -76,8 +84,16 @@ describe('service worker cleanup', () => {
     expect(window.caches.delete).toHaveBeenCalledWith(
       'runtime-https://monkeyandres.com/whatsapp-chat-viewer/'
     )
+    expect(window.caches.delete).not.toHaveBeenCalledWith('precache-v2')
+    expect(window.caches.delete).not.toHaveBeenCalledWith('runtime')
+    expect(window.caches.delete).not.toHaveBeenCalledWith(
+      'whatsapp-chat-viewer-precache-v2'
+    )
     expect(window.caches.delete).not.toHaveBeenCalledWith(
       'precache-v2-https://monkeyandres.github.io/another-app/'
+    )
+    expect(window.caches.delete).not.toHaveBeenCalledWith(
+      'runtime-https://monkeyandres.github.io/another-app/'
     )
     expect(window.caches.delete).not.toHaveBeenCalledWith(
       'synthetic-cache-from-another-app'

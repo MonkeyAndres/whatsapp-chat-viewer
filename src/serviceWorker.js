@@ -129,6 +129,7 @@ function checkValidServiceWorker(swUrl, config) {
 }
 
 const LEGACY_SW_RELOAD_KEY = 'whatsapp-chat-viewer-legacy-sw-reloaded';
+const LEGACY_VIEWER_CACHE_NAME = 'whatsapp-chat-viewer-precache';
 const VIEWER_SCOPE_PATH = '/whatsapp-chat-viewer/';
 
 function belongsToViewerScope(url) {
@@ -140,6 +141,10 @@ function belongsToViewerScope(url) {
 }
 
 function cacheBelongsToViewer(cacheName) {
+  if (cacheName === LEGACY_VIEWER_CACHE_NAME) {
+    return true;
+  }
+
   const urlMatches = cacheName.match(/https?:\/\/[^\s]+/g) || [];
 
   return urlMatches.some(url => belongsToViewerScope(url));
