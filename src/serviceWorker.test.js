@@ -40,32 +40,48 @@ describe('service worker cleanup', () => {
     window.location.reload = originalReload
   })
 
-  test('unregisters old registrations, clears previous caches, and reloads once', async () => {
-    const unregisterFirst = jest.fn(() => Promise.resolve(true))
-    const unregisterSecond = jest.fn(() => Promise.resolve(true))
+  test('unregisters viewer registrations, clears only viewer caches, and reloads once', async () => {
+    const unregisterViewer = jest.fn(() => Promise.resolve(true))
+    const unregisterOtherApp = jest.fn(() => Promise.resolve(true))
 
     navigator.serviceWorker.getRegistrations.mockResolvedValue([
-      { unregister: unregisterFirst },
-      { unregister: unregisterSecond },
+      {
+        scope: 'https://monkeyandres.github.io/whatsapp-chat-viewer/',
+        unregister: unregisterViewer,
+      },
+      {
+        scope: 'https://monkeyandres.github.io/another-app/',
+        unregister: unregisterOtherApp,
+      },
     ])
     window.caches.keys.mockResolvedValue([
+      'precache-v2-https://monkeyandres.github.io/whatsapp-chat-viewer/',
       'precache-v2-https://monkeyandres.com/whatsapp-chat-viewer/',
       'runtime-https://monkeyandres.com/whatsapp-chat-viewer/',
-      'other-cache',
+      'precache-v2-https://monkeyandres.github.io/another-app/',
+      'synthetic-cache-from-another-app',
     ])
     window.caches.delete.mockResolvedValue(true)
 
     await unregister({ reloadOnUnregister: true })
 
-    expect(unregisterFirst).toHaveBeenCalledTimes(1)
-    expect(unregisterSecond).toHaveBeenCalledTimes(1)
+    expect(unregisterViewer).toHaveBeenCalledTimes(1)
+    expect(unregisterOtherApp).not.toHaveBeenCalled()
+    expect(window.caches.delete).toHaveBeenCalledWith(
+      'precache-v2-https://monkeyandres.github.io/whatsapp-chat-viewer/'
+    )
     expect(window.caches.delete).toHaveBeenCalledWith(
       'precache-v2-https://monkeyandres.com/whatsapp-chat-viewer/'
     )
     expect(window.caches.delete).toHaveBeenCalledWith(
       'runtime-https://monkeyandres.com/whatsapp-chat-viewer/'
     )
-    expect(window.caches.delete).toHaveBeenCalledWith('other-cache')
+    expect(window.caches.delete).not.toHaveBeenCalledWith(
+      'precache-v2-https://monkeyandres.github.io/another-app/'
+    )
+    expect(window.caches.delete).not.toHaveBeenCalledWith(
+      'synthetic-cache-from-another-app'
+    )
     expect(window.location.reload).toHaveBeenCalledTimes(1)
 
     await unregister({ reloadOnUnregister: true })
@@ -81,7 +97,10 @@ describe('service worker cleanup', () => {
       value: undefined,
     })
     navigator.serviceWorker.getRegistrations.mockResolvedValue([
-      { unregister: unregisterRegistration },
+      {
+        scope: 'https://monkeyandres.github.io/whatsapp-chat-viewer/',
+        unregister: unregisterRegistration,
+      },
     ])
 
     await unregister({ reloadOnUnregister: true })
