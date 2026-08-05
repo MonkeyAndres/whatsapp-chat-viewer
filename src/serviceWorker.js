@@ -129,19 +129,36 @@ function checkValidServiceWorker(swUrl, config) {
 }
 
 const LEGACY_SW_RELOAD_KEY = 'whatsapp-chat-viewer-legacy-sw-reloaded';
+const VIEWER_SCOPE_PATH = '/whatsapp-chat-viewer/';
 
-function clearAppCaches() {
-  if (!('caches' in window)) {
+function belongsToViewerScope(url) {
+  try {
+    return new URL(url, window.location.href).pathname.indexOf(VIEWER_SCOPE_PATH) === 0;
+  } catch (error) {
+    return false;
+  }
+}
+
+function cacheBelongsToViewer(cacheName) {
+  const urlMatches = cacheName.match(/https?:\/\/[^\s]+/g) || [];
+
+  return urlMatches.some(url => belongsToViewerScope(url));
+}
+
+function clearBrowserCaches() {
+  if (!window.caches) {
     return Promise.resolve();
   }
 
-  return caches.keys().then(cacheNames =>
-    Promise.all(
-      cacheNames
-        .filter(cacheName => cacheName.indexOf('whatsapp-chat-viewer') !== -1)
-        .map(cacheName => caches.delete(cacheName))
-    )
-  );
+  return window.caches
+    .keys()
+    .then(cacheNames =>
+      Promise.all(
+        cacheNames
+          .filter(cacheName => cacheBelongsToViewer(cacheName))
+          .map(cacheName => window.caches.delete(cacheName))
+      )
+    );
 }
 
 export function unregister(config = {}) {
@@ -152,9 +169,13 @@ export function unregister(config = {}) {
 
     return getRegistrations
       .then(registrations => {
-        return Promise.all(registrations.map(registration => registration.unregister()));
+        return Promise.all(
+          registrations
+            .filter(registration => belongsToViewerScope(registration.scope))
+            .map(registration => registration.unregister())
+        );
       })
-      .then(() => clearAppCaches())
+      .then(() => clearBrowserCaches())
       .then(() => {
         const shouldReload =
           config.reloadOnUnregister &&
