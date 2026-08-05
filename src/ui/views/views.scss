@@ -32,6 +32,8 @@
 
 .errorView {
   height: 100%;
+  box-sizing: border-box;
+  padding: 1.5rem;
 
   display: flex;
   flex-direction: column;
@@ -39,10 +41,55 @@
   align-items: center;
 
   background-color: $dark_sky_blue;
+  text-align: center;
+
+  &-title {
+    max-width: 32rem;
+    margin: 0 0 0.75rem;
+    font-size: 1.5rem;
+  }
 
   &-description {
+    max-width: 34rem;
     margin: 0;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
+    line-height: 1.4;
+  }
+
+  &-diagnostic {
+    width: 100%;
+    max-width: 34rem;
+    margin-bottom: 1.25rem;
+    color: rgba($color: #000000, $alpha: 0.7);
+    font-size: 0.85rem;
+    line-height: 1.35;
+    text-align: left;
+
+    dl {
+      display: grid;
+      grid-template-columns: minmax(7rem, auto) 1fr;
+      gap: 0.35rem 0.75rem;
+      margin: 0 0 0.75rem;
+    }
+
+    div {
+      display: contents;
+    }
+
+    dt {
+      font-weight: 700;
+    }
+
+    dd {
+      margin: 0;
+      min-width: 0;
+      overflow-wrap: anywhere;
+    }
+
+    p {
+      margin: 0;
+      overflow-wrap: anywhere;
+    }
   }
 
   &-button {
@@ -55,6 +102,29 @@
 
     &:hover {
       background-color: rgba($color: #000000, $alpha: 0.3);
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .errorView {
+    padding: 1rem;
+
+    &-title {
+      font-size: 1.25rem;
+    }
+
+    &-diagnostic {
+      font-size: 0.8rem;
+
+      dl {
+        grid-template-columns: 1fr;
+        gap: 0.15rem;
+      }
+
+      dd {
+        margin-bottom: 0.35rem;
+      }
     }
   }
 }
