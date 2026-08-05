@@ -1,10 +1,8 @@
-import React from 'react'
+import React, { useCallback, useState } from 'react'
+import { Virtuoso } from 'react-virtuoso'
 import ChatView from '../ui/chat/ChatView'
 import ChatMessage from '../ui/chat/ChatMessage'
-import VisibilitySensor from 'react-visibility-sensor'
-import { useCallback } from 'react'
-import useChatState from './useChatState'
-import Spinner from '../ui/shared/Spinner'
+import { CHAT_READ_MODES } from './chatReadModes'
 
 const getConversationHeader = ({ chat, selectedContact }) => {
   if (chat?.contacts?.length === 2) {
@@ -16,51 +14,55 @@ const getConversationHeader = ({ chat, selectedContact }) => {
 }
 
 const Chat = ({ chat, selectedContact, goBack }) => {
-  const {
-    hasMoreMessages,
-    loadPrevious,
-    messages,
-    messageRefs,
-    isGroupChat,
-  } = useChatState({
-    chat: chat,
-    messagesPerPage: 100,
-  })
+  const [readMode, setReadMode] = useState(CHAT_READ_MODES.latest)
+
+  const messages = chat.messages
+  const isGroupChat = chat.contacts.length > 2
 
   const renderMessage = useCallback(
-    (msg) => {
+    (index, msg) => {
       const isMine = msg.sender === selectedContact
 
       return (
         <ChatMessage
-          key={msg.id}
           msg={msg}
-          msgRef={messageRefs[msg.id]}
           isMine={isMine}
           isGroup={isGroupChat}
         />
       )
     },
-    [isGroupChat, messageRefs, selectedContact]
+    [isGroupChat, selectedContact]
+  )
+
+  const getMessageKey = useCallback(
+    (index, msg) => msg.id,
+    []
+  )
+
+  const initialTopMostItemIndex = readMode === CHAT_READ_MODES.latest
+    ? { index: messages.length - 1, align: 'end' }
+    : { index: 0, align: 'start' }
+
+  const virtualChat = (
+    <Virtuoso
+      key={readMode}
+      className="chatVirtuoso"
+      data={messages}
+      computeItemKey={getMessageKey}
+      initialTopMostItemIndex={initialTopMostItemIndex}
+      alignToBottom={readMode === CHAT_READ_MODES.latest}
+      overscan={600}
+      itemContent={renderMessage}
+    />
   )
 
   return (
     <ChatView
       header={getConversationHeader({ chat, selectedContact })}
       goBack={goBack}
-      chatSlot={
-        <>
-          {hasMoreMessages && (
-            <VisibilitySensor onChange={loadPrevious} delayedCall={true}>
-              <div className="loader">
-                <Spinner />
-              </div>
-            </VisibilitySensor>
-          )}
-
-          {messages.map(renderMessage)}
-        </>
-      }
+      readMode={readMode}
+      onReadModeChange={setReadMode}
+      chatSlot={virtualChat}
     />
   )
 }

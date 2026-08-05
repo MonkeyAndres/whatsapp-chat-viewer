@@ -58,11 +58,12 @@
 
 .chatView {
   background-color: $chat_background;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  height: 100%;
+  overflow: hidden;
 
   &-header {
-    position: sticky;
-    top: 0;
-    left: 0;
     z-index: 100;
     width: 100%;
     box-sizing: border-box;
@@ -73,8 +74,10 @@
 
     display: flex;
     align-items: center;
+    gap: 15px;
 
     .back-arrow {
+      flex: 0 0 auto;
       width: 35px;
       height: 35px;
       cursor: pointer;
@@ -82,13 +85,13 @@
 
     .header-text {
       display: block;
-      width: 100%;
+      flex: 1 1 auto;
+      min-width: 0;
 
       font-size: 30px;
       font-weight: normal;
 
       margin: 0;
-      margin-left: 15px;
 
       white-space: nowrap;
       overflow: hidden;
@@ -97,6 +100,35 @@
   }
 
   &-container {
+    min-height: 0;
+    overflow: hidden;
+  }
+}
+
+.readModeSwitch {
+  flex: 0 0 auto;
+  display: inline-flex;
+  gap: 0.25rem;
+
+  &-option {
+    min-height: 2rem;
+    border: 1px solid rgba($color: #000000, $alpha: 0.25);
+    border-radius: 3px;
+    background-color: rgba($color: #ffffff, $alpha: 0.65);
+    cursor: pointer;
+
+    &[aria-pressed='true'] {
+      background-color: white;
+      font-weight: 700;
+    }
+  }
+}
+
+.chatVirtuoso {
+  height: 100%;
+  overflow-x: hidden;
+
+  .chatMessageRow {
     overflow-x: hidden;
     display: grid;
 
@@ -106,14 +138,6 @@
     row-gap: 10px;
 
     padding: 10px 0;
-
-    .loader {
-      grid-column: 1 / 8;
-      height: 50px;
-      padding: 15px 0;
-
-      margin: 0 auto;
-    }
 
     .message {
       padding: 10px;
@@ -225,6 +249,9 @@
 
   .chatView {
     &-header {
+      flex-wrap: wrap;
+      gap: 0.5rem 10px;
+
       .back-arrow {
         width: 25px;
       }
@@ -233,8 +260,18 @@
         font-size: 25px;
       }
     }
+  }
 
-    &-container {
+  .readModeSwitch {
+    width: 100%;
+
+    &-option {
+      flex: 1 1 0;
+    }
+  }
+
+  .chatVirtuoso {
+    .chatMessageRow {
       grid-template-columns: 20px 1fr 1fr 1fr 1fr 1fr 20px;
 
       .message {

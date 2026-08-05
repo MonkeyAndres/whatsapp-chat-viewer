@@ -39,6 +39,9 @@ const translations = {
     'contact.back': 'Volver',
     'contact.title': 'Selecciona quien eres.',
     'chat.back': 'Volver',
+    'chat.readMode': 'Modo de lectura',
+    'chat.fromBeginning': 'Desde el principio',
+    'chat.latestMessages': 'Mensajes recientes',
     'error.unsupportedTitle':
       'Esto no parece un chat de WhatsApp compatible.',
     'error.unsupportedDescription':
@@ -96,6 +99,9 @@ const translations = {
     'contact.back': 'Back',
     'contact.title': 'Select who you are.',
     'chat.back': 'Back',
+    'chat.readMode': 'Reading mode',
+    'chat.fromBeginning': 'From the beginning',
+    'chat.latestMessages': 'Latest messages',
     'error.unsupportedTitle':
       'This does not look like a supported WhatsApp chat.',
     'error.unsupportedDescription':
