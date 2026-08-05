@@ -97,11 +97,15 @@
     border: 0;
     padding: 0.7rem 1.5rem;
     border-radius: 3px;
-    outline: none;
     cursor: pointer;
 
     &:hover {
       background-color: rgba($color: #000000, $alpha: 0.3);
+    }
+
+    &:focus {
+      outline: 3px solid #111;
+      outline-offset: 3px;
     }
   }
 }

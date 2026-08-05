@@ -13,7 +13,19 @@
     padding: 1rem;
 
     .back-arrow {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       cursor: pointer;
+      border: 0;
+      background: transparent;
+      padding: 0;
+
+      svg {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
     }
 
     .text {
@@ -46,8 +58,6 @@
 
     border: 0;
     border-radius: 3px;
-    outline: none;
-
     cursor: pointer;
 
     &:hover {
@@ -58,11 +68,12 @@
 
 .chatView {
   background-color: $chat_background;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  height: 100%;
+  overflow: hidden;
 
   &-header {
-    position: sticky;
-    top: 0;
-    left: 0;
     z-index: 100;
     width: 100%;
     box-sizing: border-box;
@@ -73,22 +84,33 @@
 
     display: flex;
     align-items: center;
+    gap: 15px;
 
     .back-arrow {
+      flex: 0 0 auto;
       width: 35px;
       height: 35px;
       cursor: pointer;
+      border: 0;
+      background: transparent;
+      padding: 0;
+
+      svg {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
     }
 
     .header-text {
       display: block;
-      width: 100%;
+      flex: 1 1 auto;
+      min-width: 0;
 
       font-size: 30px;
       font-weight: normal;
 
       margin: 0;
-      margin-left: 15px;
 
       white-space: nowrap;
       overflow: hidden;
@@ -97,6 +119,36 @@
   }
 
   &-container {
+    min-height: 0;
+    overflow: hidden;
+  }
+}
+
+.readModeSwitch {
+  flex: 0 0 auto;
+  display: inline-flex;
+  gap: 0.25rem;
+
+  &-option {
+    min-height: 2rem;
+    padding: 0.25rem 0.6rem;
+    border: 1px solid rgba($color: #000000, $alpha: 0.25);
+    border-radius: 3px;
+    background-color: rgba($color: #ffffff, $alpha: 0.65);
+    cursor: pointer;
+
+    &[aria-pressed='true'] {
+      background-color: white;
+      font-weight: 700;
+    }
+  }
+}
+
+.chatVirtuoso {
+  height: 100%;
+  overflow-x: hidden;
+
+  .chatMessageRow {
     overflow-x: hidden;
     display: grid;
 
@@ -107,17 +159,11 @@
 
     padding: 10px 0;
 
-    .loader {
-      grid-column: 1 / 8;
-      height: 50px;
-      padding: 15px 0;
-
-      margin: 0 auto;
-    }
-
     .message {
       padding: 10px;
       position: relative;
+      max-width: 100%;
+      box-sizing: border-box;
 
       &:after {
         position: absolute;
@@ -144,14 +190,18 @@
       .content {
         display: inline-block;
         font-family: inherit;
-        white-space: pre-line;
+        max-width: 100%;
+        white-space: pre-wrap;
         margin: 0;
         overflow-wrap: anywhere;
+        word-break: break-word;
       }
 
       &.others {
         grid-column: 2 / 5;
         justify-self: flex-start;
+        max-width: calc(100% - 10px);
+        margin-left: 10px;
 
         background-color: $middle_blue;
         border-radius: 0px 5px 5px 5px;
@@ -167,6 +217,8 @@
       &.mine {
         grid-column: 4 / 7;
         justify-self: flex-end;
+        max-width: calc(100% - 10px);
+        margin-right: 10px;
 
         border-radius: 5px 0px 5px 5px;
         background-color: white;
@@ -211,6 +263,7 @@
     &-header {
       .back-arrow {
         width: 25px;
+        height: 25px;
       }
 
       .text {
@@ -225,16 +278,33 @@
 
   .chatView {
     &-header {
+      flex-wrap: wrap;
+      gap: 0.5rem 10px;
+
       .back-arrow {
         width: 25px;
+        height: 25px;
       }
 
       .header-text {
-        font-size: 25px;
+        font-size: 22px;
       }
     }
+  }
 
-    &-container {
+  .readModeSwitch {
+    width: 100%;
+
+    &-option {
+      flex: 1 1 0;
+      min-width: 0;
+      min-height: 44px;
+      overflow-wrap: anywhere;
+    }
+  }
+
+  .chatVirtuoso {
+    .chatMessageRow {
       grid-template-columns: 20px 1fr 1fr 1fr 1fr 1fr 20px;
 
       .message {
@@ -251,5 +321,18 @@
         }
       }
     }
+  }
+}
+
+.back-arrow:focus,
+.contactSelector-contact:focus,
+.readModeSwitch-option:focus {
+  outline: 3px solid #111;
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chatVirtuoso {
+    scroll-behavior: auto;
   }
 }

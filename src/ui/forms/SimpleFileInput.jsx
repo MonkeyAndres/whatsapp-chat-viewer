@@ -1,15 +1,17 @@
 import React, { useRef } from 'react'
 import { ReactComponent as UploadIcon } from '../../assets/icons/upload.svg'
+import { useI18n } from '../../app/i18n'
 
 const SimpleFileInput = ({ onSelectFile }) => {
   const fileInputRef = useRef()
+  const { t } = useI18n()
 
   return (
     <div className="selectFile" onClick={() => fileInputRef.current.click()}>
       <UploadIcon className="selectFile-icon" />
 
       <h2 className="selectFile-label" htmlFor="chat">
-        Choose a file!
+        {t('file.choose')}
       </h2>
 
       <input

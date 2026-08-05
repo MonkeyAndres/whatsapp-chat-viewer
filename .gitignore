@@ -8,11 +8,14 @@
 # testing
 /coverage
 /.worker-evidence/
+/playwright-report/
+/test-results/
 
 # production
 /build
 
 # misc
+.cache/
 .DS_Store
 .env.local
 .env.development.local

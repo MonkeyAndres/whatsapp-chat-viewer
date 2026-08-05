@@ -10,7 +10,7 @@
   grid-template-columns: 2rem 3fr 5fr 2rem;
   grid-template-rows: minmax(2rem, auto) minmax(auto, 800px) minmax(2rem, auto);
   grid-template-areas:
-    '. ........ ............. .'
+    '. languageSwitcher languageSwitcher .'
     '. aboutApp chatContainer .'
     '. ........ ............. .';
 
@@ -27,13 +27,48 @@
     height: 100%;
     overflow: auto;
   }
+
+  .languageSwitcher {
+    grid-area: languageSwitcher;
+    justify-self: end;
+    align-self: end;
+  }
+}
+
+.languageSwitcher {
+  display: inline-flex;
+  gap: 0.25rem;
+  padding: 0.4rem 0;
+
+  &-option {
+    min-width: 2.75rem;
+    min-height: 2rem;
+    border: 1px solid rgba($color: #000000, $alpha: 0.25);
+    border-radius: 3px;
+    background: #fff;
+    cursor: pointer;
+
+    &[aria-pressed='true'] {
+      background-color: $dark_sky_blue;
+      font-weight: 700;
+    }
+  }
+}
+
+.languageSwitcher-option:focus {
+  outline: 3px solid #111;
+  outline-offset: 3px;
 }
 
 @media screen and (max-width: 1033px) {
   .layoutGrid {
     grid-template-columns: 1fr;
-    grid-template-rows: auto minmax(250px, 1fr);
-    grid-template-areas: 'aboutApp' 'chatContainer';
+    grid-template-rows: auto auto minmax(250px, 1fr);
+    grid-template-areas: 'languageSwitcher' 'aboutApp' 'chatContainer';
+
+    .languageSwitcher {
+      padding-right: 1rem;
+    }
   }
 }
 
@@ -42,5 +77,13 @@
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr;
     grid-template-areas: 'aboutApp chatContainer';
+
+    .languageSwitcher {
+      position: fixed;
+      top: 0.5rem;
+      right: 0.5rem;
+      z-index: 200;
+      padding: 0;
+    }
   }
 }

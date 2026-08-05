@@ -1,42 +1,45 @@
 import React from 'react'
+import { useI18n } from '../../app/i18n'
 
 const AboutApp = () => {
+  const { t } = useI18n()
+
   return (
     <div className="aboutApp">
-      <h1 className="welcome-title">WhatsApp<br/>Chat viewer</h1>
+      <h1 className="welcome-title">
+        {t('about.title').split('\n').map((line, index) => (
+          <React.Fragment key={line}>
+            {index > 0 && <br />}
+            {line}
+          </React.Fragment>
+        ))}
+      </h1>
 
-      <p>
-        WhatsApp chat viewer is an online tool that allows you to view your
-        WhatsApp exported chats. The web doesn't store any user data it only
-        formats the chat messages in a more visual way in order to help users to
-        read exported chats.
-      </p>
+      <p>{t('about.description')}</p>
 
-      <p>
-        In order to be able to use this tool, you will need an exported WhatsApp
-        chat. This file has the extension txt. Bellow, I will show you how you
-        can export a WhatsApp chat.
-      </p>
+      <p>{t('about.requirement')}</p>
 
-      <h2 className="aboutApp-subheader">How to export a WhatsApp Chat?</h2>
-      <p>Follow the "Export chat history" part of the tutorials bellow.</p>
+      <h2 className="aboutApp-subheader">{t('about.exportTitle')}</h2>
+      <p>{t('about.exportHelp')}</p>
       <p>
         <a href="https://faq.whatsapp.com/en/android/23756533/">
-          For Android devices
+          {t('about.android')}
         </a>
       </p>
       <p>
         <a href="https://faq.whatsapp.com/en/iphone/26000285/?category=5245251">
-          For iPhone devices
+          {t('about.iphone')}
         </a>
       </p>
 
-      <h2 className="aboutApp-subheader">About this project.</h2>
+      <h2 className="aboutApp-subheader">{t('about.projectTitle')}</h2>
       <p>
-        This is a personal project developed by{' '}
-        <a href="https://github.com/MonkeyAndres">@MonkeyAndres</a>. Is
-        completely free and open source. You can access the source code{' '}
-        <a href="https://github.com/MonkeyAndres/whatsapp-chat-viewer">here.</a>
+        {t('about.projectPrefix')}
+        <a href="https://github.com/MonkeyAndres">@MonkeyAndres</a>
+        {t('about.projectMiddle')}
+        <a href="https://github.com/MonkeyAndres/whatsapp-chat-viewer">
+          {t('about.projectLink')}
+        </a>
       </p>
 
       <br />

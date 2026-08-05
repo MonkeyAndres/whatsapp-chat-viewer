@@ -24,9 +24,9 @@ jobs:
           fi
 
       - name: Setup Node
-        uses: actions/setup-node@v7
+        uses: actions/setup-node@v4
         with:
-          node-version: '16.20.2'
+          node-version: '22.23.1'
           cache: yarn
 
       - name: Setup Yarn
@@ -40,6 +40,12 @@ jobs:
 
       - name: Build
         run: yarn build
+
+      - name: Install Playwright browsers
+        run: yarn playwright install chromium --with-deps
+
+      - name: Test large chat reading
+        run: yarn test:e2e
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v4
