@@ -40,7 +40,7 @@ describe('service worker cleanup', () => {
     window.location.reload = originalReload
   })
 
-  test('unregisters old registrations, clears app caches, and reloads once', async () => {
+  test('unregisters old registrations, clears previous caches, and reloads once', async () => {
     const unregisterFirst = jest.fn(() => Promise.resolve(true))
     const unregisterSecond = jest.fn(() => Promise.resolve(true))
 
@@ -49,7 +49,8 @@ describe('service worker cleanup', () => {
       { unregister: unregisterSecond },
     ])
     window.caches.keys.mockResolvedValue([
-      'whatsapp-chat-viewer-precache',
+      'precache-v2-https://monkeyandres.com/whatsapp-chat-viewer/',
+      'runtime-https://monkeyandres.com/whatsapp-chat-viewer/',
       'other-cache',
     ])
     window.caches.delete.mockResolvedValue(true)
@@ -59,13 +60,33 @@ describe('service worker cleanup', () => {
     expect(unregisterFirst).toHaveBeenCalledTimes(1)
     expect(unregisterSecond).toHaveBeenCalledTimes(1)
     expect(window.caches.delete).toHaveBeenCalledWith(
-      'whatsapp-chat-viewer-precache'
+      'precache-v2-https://monkeyandres.com/whatsapp-chat-viewer/'
     )
-    expect(window.caches.delete).not.toHaveBeenCalledWith('other-cache')
+    expect(window.caches.delete).toHaveBeenCalledWith(
+      'runtime-https://monkeyandres.com/whatsapp-chat-viewer/'
+    )
+    expect(window.caches.delete).toHaveBeenCalledWith('other-cache')
     expect(window.location.reload).toHaveBeenCalledTimes(1)
 
     await unregister({ reloadOnUnregister: true })
 
+    expect(window.location.reload).toHaveBeenCalledTimes(1)
+  })
+
+  test('does not fail when Cache Storage is unavailable', async () => {
+    const unregisterRegistration = jest.fn(() => Promise.resolve(true))
+
+    Object.defineProperty(window, 'caches', {
+      configurable: true,
+      value: undefined,
+    })
+    navigator.serviceWorker.getRegistrations.mockResolvedValue([
+      { unregister: unregisterRegistration },
+    ])
+
+    await unregister({ reloadOnUnregister: true })
+
+    expect(unregisterRegistration).toHaveBeenCalledTimes(1)
     expect(window.location.reload).toHaveBeenCalledTimes(1)
   })
 })

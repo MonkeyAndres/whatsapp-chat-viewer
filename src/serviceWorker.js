@@ -130,18 +130,16 @@ function checkValidServiceWorker(swUrl, config) {
 
 const LEGACY_SW_RELOAD_KEY = 'whatsapp-chat-viewer-legacy-sw-reloaded';
 
-function clearAppCaches() {
-  if (!('caches' in window)) {
+function clearBrowserCaches() {
+  if (!window.caches) {
     return Promise.resolve();
   }
 
-  return caches.keys().then(cacheNames =>
-    Promise.all(
-      cacheNames
-        .filter(cacheName => cacheName.indexOf('whatsapp-chat-viewer') !== -1)
-        .map(cacheName => caches.delete(cacheName))
-    )
-  );
+  return window.caches
+    .keys()
+    .then(cacheNames =>
+      Promise.all(cacheNames.map(cacheName => window.caches.delete(cacheName)))
+    );
 }
 
 export function unregister(config = {}) {
@@ -154,7 +152,7 @@ export function unregister(config = {}) {
       .then(registrations => {
         return Promise.all(registrations.map(registration => registration.unregister()));
       })
-      .then(() => clearAppCaches())
+      .then(() => clearBrowserCaches())
       .then(() => {
         const shouldReload =
           config.reloadOnUnregister &&
