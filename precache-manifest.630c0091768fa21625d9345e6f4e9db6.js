@@ -1,27 +1,27 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "0ef78e4877dd596122c5a8b2db0fa6df",
+    "revision": "5bd6ca3f0701fa0d3d786fef2c588d73",
     "url": "/whatsapp-chat-viewer/index.html"
   },
   {
-    "revision": "5e70ee95f807b1d9542f",
-    "url": "/whatsapp-chat-viewer/static/css/main.71f27558.chunk.css"
+    "revision": "364b50269bed10f4f138",
+    "url": "/whatsapp-chat-viewer/static/css/main.374012b3.chunk.css"
   },
   {
-    "revision": "b131943f2f8a1121604d",
-    "url": "/whatsapp-chat-viewer/static/js/2.d7241221.chunk.js"
+    "revision": "edd2d65a3a31847ab624",
+    "url": "/whatsapp-chat-viewer/static/js/2.fe046026.chunk.js"
   },
   {
     "revision": "570d362d673dab785e62d2b8563e1118",
-    "url": "/whatsapp-chat-viewer/static/js/2.d7241221.chunk.js.LICENSE.txt"
+    "url": "/whatsapp-chat-viewer/static/js/2.fe046026.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "5e70ee95f807b1d9542f",
-    "url": "/whatsapp-chat-viewer/static/js/main.823ae21e.chunk.js"
+    "revision": "364b50269bed10f4f138",
+    "url": "/whatsapp-chat-viewer/static/js/main.e0ceb65e.chunk.js"
   },
   {
     "revision": "4e0e34f265fae8f33b01b27ae29d9d6f",
-    "url": "/whatsapp-chat-viewer/static/js/main.823ae21e.chunk.js.LICENSE.txt"
+    "url": "/whatsapp-chat-viewer/static/js/main.e0ceb65e.chunk.js.LICENSE.txt"
   },
   {
     "revision": "c81c57c4517f1e6f1324",
