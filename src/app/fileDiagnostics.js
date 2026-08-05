@@ -1,6 +1,7 @@
 export const RECOGNIZED_WHATSAPP_FORMATS = [
   '[13/2/2024, 15:04:05] Name: message',
   '13/2/24, 3:04 PM - Name: message',
+  '5/16/16, 7:49 PM - Name: message',
   '13/2/24, 3:04 PM Name: message',
 ]
 
@@ -45,6 +46,7 @@ export const createLoadDiagnostic = ({ file, content, kind }) => ({
 
 export const createFormatDiagnostic = ({ file, content }) => ({
   ...createLoadDiagnostic({ file, content, kind: 'format' }),
+  parser: null,
   stableCause: 'No supported WhatsApp message lines were found.',
 })
 
