@@ -128,14 +128,48 @@ function checkValidServiceWorker(swUrl, config) {
     });
 }
 
-export function unregister() {
+const LEGACY_SW_RELOAD_KEY = 'whatsapp-chat-viewer-legacy-sw-reloaded';
+
+function clearAppCaches() {
+  if (!('caches' in window)) {
+    return Promise.resolve();
+  }
+
+  return caches.keys().then(cacheNames =>
+    Promise.all(
+      cacheNames
+        .filter(cacheName => cacheName.indexOf('whatsapp-chat-viewer') !== -1)
+        .map(cacheName => caches.delete(cacheName))
+    )
+  );
+}
+
+export function unregister(config = {}) {
   if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.ready
-      .then(registration => {
-        registration.unregister();
+    const getRegistrations = navigator.serviceWorker.getRegistrations
+      ? navigator.serviceWorker.getRegistrations()
+      : navigator.serviceWorker.ready.then(registration => [registration]);
+
+    return getRegistrations
+      .then(registrations => {
+        return Promise.all(registrations.map(registration => registration.unregister()));
+      })
+      .then(() => clearAppCaches())
+      .then(() => {
+        const shouldReload =
+          config.reloadOnUnregister &&
+          navigator.serviceWorker.controller &&
+          sessionStorage.getItem(LEGACY_SW_RELOAD_KEY) !== 'true';
+
+        if (shouldReload) {
+          sessionStorage.setItem(LEGACY_SW_RELOAD_KEY, 'true');
+          window.location.reload();
+        }
       })
       .catch(error => {
         console.error(error.message);
       });
   }
+
+  return Promise.resolve();
 }

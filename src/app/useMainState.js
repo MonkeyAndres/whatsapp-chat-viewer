@@ -1,6 +1,10 @@
 import { useEffect, useReducer, useCallback } from 'react'
 import readBrowserFileContent from '../lib/readBrowserFileContent'
 import parseWhatsappChat from '../lib/whatsapp-parser'
+import {
+  createFormatDiagnostic,
+  createReadDiagnostic,
+} from './fileDiagnostics'
 
 const initialState = {
   chat: null,
@@ -50,17 +54,30 @@ const useMainState = (selectedFile) => {
 
   useEffect(() => {
     ;(async function () {
+      let data = null
+
       try {
         if (!selectedFile) return
 
         dispatch({ type: 'startLoading' })
 
-        const data = await readBrowserFileContent(selectedFile)
+        data = await readBrowserFileContent(selectedFile)
         const chat = parseWhatsappChat(data)
 
         dispatch({ type: 'setChat', payload: chat })
       } catch (error) {
-        dispatch({ type: 'setLoadError', payload: error })
+        const diagnostic =
+          typeof data === 'string'
+            ? createFormatDiagnostic({ file: selectedFile, content: data })
+            : createReadDiagnostic({ file: selectedFile })
+
+        dispatch({
+          type: 'setLoadError',
+          payload: {
+            error,
+            diagnostic,
+          },
+        })
       }
     })()
   }, [selectedFile])
